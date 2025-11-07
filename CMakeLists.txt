@@ -3,4 +3,8 @@ project(untitled10 C)
 
 set(CMAKE_C_STANDARD 11)
 
-add_executable(untitled10 main.c fonction.c)
+add_executable(untitled10 main.c fonction.c
+        cmake-build-debug/utils.c
+        cmake-build-debug/utils.h
+        cmake-build-debug/hasse.c
+        cmake-build-debug/hasse.h)
