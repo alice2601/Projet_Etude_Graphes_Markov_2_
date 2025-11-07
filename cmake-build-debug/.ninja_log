@@ -1,0 +1,7 @@
+# ninja log v6
+5	122	7839695162198837	CMakeFiles/untitled10.dir/main.c.obj	994d0de7b11adf71
+17	148	7839695162312553	CMakeFiles/untitled10.dir/fonction.c.obj	1b7ee26695b85442
+148	395	7839695163634319	untitled10.exe	c70b8a5bbff4935d
+6	158	7842510668814619	CMakeFiles/untitled10.dir/utils.c.obj	e68feaa645620bb5
+5	98	7842512170501319	CMakeFiles/untitled10.dir/hasse.c.obj	3b1122d61d36a7bc
+100	751	7842512171449333	untitled10.exe	e6f723d57db11f52
