@@ -77,6 +77,20 @@ build CMakeFiles/untitled10.dir/hasse.c.obj: C_COMPILER__untitled10_unscanned_De
   OBJECT_DIR = CMakeFiles\untitled10.dir
   OBJECT_FILE_DIR = CMakeFiles\untitled10.dir
 
+build CMakeFiles/untitled10.dir/stack.c.obj: C_COMPILER__untitled10_unscanned_Debug C$:/Users/khela/CLionProjects/Projet_Etude_Graphes_Markov_2_8/cmake-build-debug/stack.c || cmake_object_order_depends_target_untitled10
+  CONFIG = Debug
+  DEP_FILE = CMakeFiles\untitled10.dir\stack.c.obj.d
+  FLAGS = -g -std=gnu11 -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles\untitled10.dir
+  OBJECT_FILE_DIR = CMakeFiles\untitled10.dir
+
+build CMakeFiles/untitled10.dir/tarjan.c.obj: C_COMPILER__untitled10_unscanned_Debug C$:/Users/khela/CLionProjects/Projet_Etude_Graphes_Markov_2_8/cmake-build-debug/tarjan.c || cmake_object_order_depends_target_untitled10
+  CONFIG = Debug
+  DEP_FILE = CMakeFiles\untitled10.dir\tarjan.c.obj.d
+  FLAGS = -g -std=gnu11 -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles\untitled10.dir
+  OBJECT_FILE_DIR = CMakeFiles\untitled10.dir
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target untitled10
@@ -85,7 +99,7 @@ build CMakeFiles/untitled10.dir/hasse.c.obj: C_COMPILER__untitled10_unscanned_De
 #############################################
 # Link the executable untitled10.exe
 
-build untitled10.exe: C_EXECUTABLE_LINKER__untitled10_Debug CMakeFiles/untitled10.dir/main.c.obj CMakeFiles/untitled10.dir/fonction.c.obj CMakeFiles/untitled10.dir/utils.c.obj CMakeFiles/untitled10.dir/hasse.c.obj
+build untitled10.exe: C_EXECUTABLE_LINKER__untitled10_Debug CMakeFiles/untitled10.dir/main.c.obj CMakeFiles/untitled10.dir/fonction.c.obj CMakeFiles/untitled10.dir/utils.c.obj CMakeFiles/untitled10.dir/hasse.c.obj CMakeFiles/untitled10.dir/stack.c.obj CMakeFiles/untitled10.dir/tarjan.c.obj
   CONFIG = Debug
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32

@@ -1,6 +1,10 @@
 #include <stdio.h>
 
 #include "cmake-build-debug/fonction.h"
+#include "cmake-build-debug/stack.h"
+#include "cmake-build-debug/tarjan.h"
+
+
 
 int main() {
     printf("Creation manuelle d un graphe : \n");
@@ -37,6 +41,11 @@ int main() {
         printf("4. Visualiser votre graphe de Markov !\n");
     }
     printf("\n");
+
+
+
+
+
 
 
 
