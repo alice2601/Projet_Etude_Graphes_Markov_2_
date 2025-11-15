@@ -113,7 +113,7 @@ et on vérifie que la somme est entre 0.99 et 1.00 (inclus)
  */
 void verifiersigraphMarkov(t_list_adjacente* mongraphe) {
     if (mongraphe == NULL) {
-        printf("Le graphe est vide, il n'y a rien à verifier.\n");
+        printf("Le graphe est vide, il n'y a rien a verifier.\n");
         return;
     }
     int graphMarkov = 1;
@@ -127,7 +127,7 @@ void verifiersigraphMarkov(t_list_adjacente* mongraphe) {
         }
         if (somme < 0.99f || somme > 1.00f) {
 
-            printf("La somme des probabilités du sommet %d est %.2f\n", i + 1, somme);
+            printf("La somme des probabilites du sommet %d est %.2f\n", i + 1, somme);
             graphMarkov = 0;
         }
     }
@@ -186,7 +186,7 @@ void generateMermaidFile(t_list_adjacente* graphe, const char* output_filename) 
     FILE* file = fopen(output_filename, "wt");
 
     if (file == NULL) {
-        perror("Impossible de créer le fichier Mermaid");
+        perror("Impossible de creer le fichier Mermaid");
         return;
     }
 

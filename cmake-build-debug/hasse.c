@@ -1,11 +1,8 @@
-//
-// Created by khela on 07/11/2025.
-//
 #include <malloc.h>
 #include "hasse.h"
 
-
-/* void removeTransitiveLinks(t_link_array *p_link_array)
+/*
+void removeTransitiveLinks(t_link_array *p_link_array)
 {
     int i = 0;
     while (i < p_link_array->log_size)

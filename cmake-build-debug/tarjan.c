@@ -1,29 +1,25 @@
-//
-// Created by khela on 14/11/2025.
-//
-
-
-
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "tarjan.h"
 
-t_tarjan_vertex* creertableau(int taille){ //là je créer mon tableau
-    if(taille <=0) return NULL;
+t_tarjan_vertex* creertableau(int taille) {
+    if(taille <= 0) return NULL;
 
     t_tarjan_vertex* tableau = malloc(sizeof(t_tarjan_vertex) * taille);
     if(tableau == NULL) return NULL;
+    
     for (int i = 0; i < taille; i++) {
-        tableau[i].id = i +1;         // identifiant = numéro du sommet ici on commence à 1 et pas à 0
+        tableau[i].id = i + 1;         // identifiant = numéro du sommet (commence à 1)
         tableau[i].number = -1;        // numéro temporaire initialisé à -1
         tableau[i].numberacces = -1;   // numéro accessible initialisé à -1
         tableau[i].indic = false;      // pas encore dans la pile
     }
 
-return tableau;
+    return tableau;
 }
 
-void parcours(int a, t_tarjan_vertex* sommets, t_stack* pile, int* compteur, t_infos* infos){
+void parcours(int a, t_tarjan_vertex* sommets, t_stack* pile, int* compteur, t_infos* infos) {
     sommets[a].numberacces = *compteur;
     sommets[a].number = *compteur;
     (*compteur)++;
@@ -31,84 +27,98 @@ void parcours(int a, t_tarjan_vertex* sommets, t_stack* pile, int* compteur, t_i
     *pile = empiler(*pile, sommets[a]);
     sommets[a].indic = true;
 
-    for (int i = 0; i < infos->nb_voisins[a]; i++){ //ici on va parcourir les voisins
-        int voisin = infos->adj[a][i];//ici on crée variable voisin
-       if (sommets[voisin].number == -1)  {
-           parcours(voisin, sommets, &pile, &compteur, &infos);
+    // Parcourir les voisins
+    for (int i = 0; i < infos->nb_voisins[a]; i++) {
+        int voisin = infos->adj[a][i];
+
+        if (sommets[voisin].number == -1) {
+            parcours(voisin, sommets, pile, compteur, infos);
             if (sommets[voisin].numberacces < sommets[a].numberacces) {
                 sommets[a].numberacces = sommets[voisin].numberacces;
             }
-
         }
-        else if (sommets[voisin].indic) {//ici on est dans la pile
+        else if (sommets[voisin].indic) {
             if (sommets[voisin].numberacces < sommets[a].numberacces) {
-                sommets[a].numberacces = sommets[voisin].numberacces;}
+                sommets[a].numberacces = sommets[voisin].numberacces;
+            }
         }
-
     }
-    //si on a sommet qui est une racine d'une composante
+
+    // Si le sommet est une racine d'une composante
     if (sommets[a].numberacces == sommets[a].number) {
         t_classe new_classe;
         new_classe.nb_sommets = 0;
-        printf("Nom de la composante : ");
-        scanf("%16s", new_classe.name);// éviter les débordements
 
-        new_classe.head = malloc(sizeof(t_tarjan_vertex)*1); //ici on cree notre nouvelle classe à laquelle on va incrementer les valeurs de la pile
-        t_tarjan_vertex sommet_temp; //on cree une valeur temporaire pour ne pas perdre la pile et ses valeurs
-        int index = 0;//on commence au début
+        // Générer automatiquement le nom de la classe (C1, C2, C3...)
+        sprintf(new_classe.name, "C%d", infos->partition->nb_classes + 1);
 
-        while (!stack_vide(*pile)) { //si liste pas vide
-            *pile = depiler(*pile, &sommet_temp); //on sort les valeurs des sommets
-            sommet_temp.indic = false;//le sommet est dépilé donc plus dans la pile, donc pas "actif"
-            //on va créer notre nouvelle classe
-            new_classe.nb_sommets++; // on augmente les sommets de 1
-            new_classe.head = realloc(new_classe.head, sizeof(t_tarjan_vertex)*new_classe.nb_sommets);
-            new_classe.head[new_classe.nb_sommets - 1] = sommet_temp; // pour les deux lignes, on a .head car on va venir de 1, modifier
-//l'allocation dynamique de la nouvelle classe, mais aussi, de 2/ ajouter la valeur du sommet qu'on a dépilé à celui où l'index est, /!\ Il s'agit donc de manipulation de tableau ici
+        new_classe.head = NULL;
+        t_tarjan_vertex sommet_temp;
 
-            if (sommet_temp.id == a ) break; //jusqu'à le sommet de la racine
-        }
-         //On va ajouter la classe à la partition (le tout)
-         infos->partition->nb_classes++;
-         infos->partition->classes = realloc(infos->partition->classes, sizeof(t_classe) * infos->partition->nb_classes); //on réaloue pour ne pas écraser l'ancienne mémoire
-         infos->partition->classes[infos->partition->nb_classes-1] = new_classe; //on fait -1 car on a incrémenté juste avant
+        // Dépiler jusqu'au sommet racine
+        do {
+            *pile = depiler(*pile, &sommet_temp);
+            // CORRECTION CRITIQUE : mettre à jour l'indic dans le tableau original
+            sommets[sommet_temp.id - 1].indic = false;
 
+            new_classe.nb_sommets++;
+            new_classe.head = realloc(new_classe.head, sizeof(t_tarjan_vertex) * new_classe.nb_sommets);
+            new_classe.head[new_classe.nb_sommets - 1] = sommet_temp;
+
+        } while (sommet_temp.id != sommets[a].id);
+
+        // Ajouter la classe à la partition
+        infos->partition->nb_classes++;
+        infos->partition->classes = realloc(infos->partition->classes,
+                                           sizeof(t_classe) * infos->partition->nb_classes);
+        infos->partition->classes[infos->partition->nb_classes - 1] = new_classe;
     }
-
 }
 
 t_partition* tarjan(int nb_sommets, int** adj, int* nb_voisins) {
-    // Initialisation des sommets, pour ça on va utiliser la fonction tableau (pas créée pour rien...)
+    // Initialisation des sommets
     t_tarjan_vertex* sommets = creertableau(nb_sommets);
     if (!sommets) {
-        printf("Erreur\n");
+        printf("Erreur lors de la creation du tableau de sommets\n");
         return NULL;
     }
-    // Maintenant on va initialiser la partition
-    t_partition* partition = malloc(sizeof(t_partition)); //ici partition est un pointeur donc attention on y accèdes avec ->, c'est une alocation dynamique d'un structure
+
+    // Initialiser la partition
+    t_partition* partition = malloc(sizeof(t_partition));
     partition->nb_classes = 0;
     partition->classes = NULL;
-    //on va créer une pile vide
+
+    // Créer une pile vide
     t_stack pile = creer_stack();
-    //on initialise la structure de l'info
+
+    // Initialiser la structure d'infos
     t_infos* infos = malloc(sizeof(t_infos));
     infos->partition = partition;
     infos->nb_voisins = nb_voisins;
     infos->adj = adj;
 
-    //on va initialiser un compteur tarjan
+    // Initialiser le compteur
     int compteur = 0;
 
-    //finalement on va parcourir tous les sommets
+    // DEBUG
+    printf("DEBUG Tarjan - Debut du parcours de %d sommets\n", nb_sommets);
+
+    // Parcourir tous les sommets
     for (int i = 0; i < nb_sommets; i++) {
         if (sommets[i].number == -1) {
-            parcours(i, sommets, &pile, &compteur, &infos);
+            //printf("DEBUG Tarjan - Visite du sommet %d (id=%d)\n", i, sommets[i].id);
+            parcours(i, sommets, &pile, &compteur, infos);
+        } else {
+            //printf("DEBUG Tarjan - Sommet %d déjà visité (number=%d)\n", i, sommets[i].number);
         }
     }
-    //comme toujours, on libère notre tableau de sommets et notre pile
-    free(sommets);
-    free(pile);
 
-    //et on return la partition
+    printf("DEBUG Tarjan - Fin du parcours, %d classes trouvees\n", partition->nb_classes);
+    
+    // Libérer la mémoire
+    free(sommets);
+    free_stack(pile);
+    free(infos);
+    
     return partition;
 }

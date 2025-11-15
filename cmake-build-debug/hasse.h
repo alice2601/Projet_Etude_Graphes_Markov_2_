@@ -1,7 +1,3 @@
-//
-// Created by khela on 07/11/2025.
-//
-
 #ifndef __HASSE_H__
 #define __HASSE_H__
 

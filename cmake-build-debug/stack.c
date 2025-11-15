@@ -1,16 +1,7 @@
-//
-// Created by khela on 14/11/2025.
-//
-
-
-//
-// Created by alice on 12/11/2025.
-//
 #include <stdio.h>
 #include <stdlib.h>
 #include "tarjan.h"
 #include "stack.h"
-
 
 // crée une pile vide (pile = NULL)
 t_stack creer_stack(void) {
@@ -26,25 +17,37 @@ bool stack_vide(t_stack p) {
 t_stack empiler(t_stack p, t_tarjan_vertex v) {
     cellule* c = malloc(sizeof(cellule));
     if (c == NULL) {
-        fprintf(stderr, "Erreur : allocation mémoire échouée dans empiler.\n");
+        fprintf(stderr, "Erreur : allocation memoire echouee dans empiler.\n");
         return p;
     }
-    *(c->val) = v;
+    
+    // CORRECTION CRITIQUE : allouer la mémoire pour val
+    c->val = malloc(sizeof(t_tarjan_vertex));
+    if (c->val == NULL) {
+        fprintf(stderr, "Erreur : allocation memoire echouee pour val.\n");
+        free(c);
+        return p;
+    }
+    
+    *(c->val) = v;  // Copier les valeurs
     c->suiv = p;
-    p = c;
-    return p;
+    return c;  // Retourner la nouvelle tête
 }
 
 // dépile le sommet, place la valeur dans *v
 t_stack depiler(t_stack p, t_tarjan_vertex* v) {
     if (p == NULL) {
-        fprintf(stderr, "Erreur : tentative de dépiler une pile vide.\n");
+        fprintf(stderr, "Erreur : tentative de depiler une pile vide.\n");
         return NULL;
     }
+    
     cellule* tmp = p;
-    *v = *(tmp->val);
+    *v = *(tmp->val);  // Copier les valeurs
     p = tmp->suiv;
-    free(tmp);
+    
+    free(tmp->val);  // Libérer val
+    free(tmp);       // Libérer la cellule
+    
     return p;
 }
 
