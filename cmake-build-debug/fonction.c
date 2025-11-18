@@ -40,7 +40,7 @@ void displayList(t_list* l) {
         printf("Liste vide\n");
     }
     while (curr !=NULL) {
-        printf(" →%d(%.2f)", curr->sommet_arrive, curr->proba);
+        printf(" ->%d(%.2f)", curr->sommet_arrive, curr->proba);
         curr =curr->next ;
     }
 

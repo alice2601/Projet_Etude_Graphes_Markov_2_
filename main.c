@@ -4,6 +4,8 @@
 #include "cmake-build-debug/stack.h"
 #include "cmake-build-debug/tarjan.h"
 #include "cmake-build-debug/mermaid_partie2.h"
+#include "cmake-build-debug/hasse.h"
+
 
 
 
@@ -119,12 +121,12 @@ printf("\n\n PARTIE 2 : ALGORITHME DE TARJAN \n\n");
         if (!found) printf("AUCUNE CLASSE !!!\n");
     }
 
-    printf("\n========== DIAGRAMME DE HASSE ==========\n\n");
+    printf("\n DIAGRAMME DE HASSE \n\n");
 
     // 5) Générer le diagramme de Hasse au format Mermaid
     generateHasseMermaidFile(partition, monGraphe, "hasse_diagram.txt");
 
-    printf("\n========== CARACTERISTIQUES DU GRAPHE ==========\n");
+    printf("\n CARACTERISTIQUES DU GRAPHE \n");
 
     // 6) Afficher les caractéristiques du graphe
     displayGraphCharacteristics(partition, monGraphe);
@@ -141,6 +143,13 @@ printf("\n\n PARTIE 2 : ALGORITHME DE TARJAN \n\n");
     }
     free(partition->classes);
     free(partition);
+
+
+
+    printf("\n DIAGRAMME DE HASSE SIMPLIFIE \n");
+
+    // Générer le diagramme de Hasse SIMPLIFIE (sans redondances)
+    generateMermaidSimplified(partition, monGraphe, "mermaid_simplifie.txt");
 
 
 

@@ -8,7 +8,7 @@ t_tarjan_vertex* creertableau(int taille) {
 
     t_tarjan_vertex* tableau = malloc(sizeof(t_tarjan_vertex) * taille);
     if(tableau == NULL) return NULL;
-    
+
     for (int i = 0; i < taille; i++) {
         tableau[i].id = i + 1;         // identifiant = numéro du sommet (commence à 1)
         tableau[i].number = -1;        // numéro temporaire initialisé à -1

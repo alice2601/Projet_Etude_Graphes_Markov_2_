@@ -126,7 +126,7 @@ void generateHasseMermaidFile(t_partition* partition, t_list_adjacente* graphe, 
         return;
     }
 
-    printf("\n=== DEBUG generateHasseMermaidFile ===\n");
+    printf("\n DEBUG generateHasseMermaidFile \n");
     printf("Nombre de classes dans partition : %d\n", partition->nb_classes);
     printf("Taille du graphe : %d sommets\n", graphe->taille);
 
@@ -205,7 +205,7 @@ void displayGraphCharacteristics(t_partition* partition, t_list_adjacente* graph
         return;
     }
 
-    printf("\n=== CARACTERISTIQUES DU GRAPHE ===\n\n");
+    printf("\n CARACTERISTIQUES DU GRAPHE \n\n");
 
     // Trouver les liens entre classes
     t_link_array* links = findClassLinks(partition, graphe);
@@ -233,7 +233,7 @@ void displayGraphCharacteristics(t_partition* partition, t_list_adjacente* graph
 
         if (has_outgoing_link) {
             printf("TRANSITOIRE\n");
-            printf("  → Les etats ");
+            printf("  -> Les etats ");
             for (int s = 0; s < partition->classes[i].nb_sommets; s++) {
                 printf("%d", partition->classes[i].head[s].id);
                 if (s < partition->classes[i].nb_sommets - 1) {
@@ -243,7 +243,7 @@ void displayGraphCharacteristics(t_partition* partition, t_list_adjacente* graph
             printf(" sont transitoires\n");
         } else {
             printf("PERSISTANTE\n");
-            printf("  → Les etats ");
+            printf("  -> Les etats ");
             for (int s = 0; s < partition->classes[i].nb_sommets; s++) {
                 printf("%d", partition->classes[i].head[s].id);
                 if (s < partition->classes[i].nb_sommets - 1) {
@@ -254,7 +254,7 @@ void displayGraphCharacteristics(t_partition* partition, t_list_adjacente* graph
 
             // Vérifier si c'est un état absorbant
             if (partition->classes[i].nb_sommets == 1) {
-                printf("  → L'etat %d est ABSORBANT\n", partition->classes[i].head[0].id);
+                printf("  -> L'etat %d est ABSORBANT\n", partition->classes[i].head[0].id);
             }
         }
     }
