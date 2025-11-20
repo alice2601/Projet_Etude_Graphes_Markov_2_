@@ -1,11 +1,12 @@
+#include "cmake-build-debug/tarjan.h"
+#include "cmake-build-debug/mermaid_partie2.h"
+#include "cmake-build-debug/hasse.h"
 #include <stdio.h>
 
 #include "cmake-build-debug/fonction.h"
 #include "cmake-build-debug/stack.h"
-#include "matrice.h" // je ne comprends pas comment le rajouter mais sur mon clion ça compile
-#include "cmake-build-debug/tarjan.h"
-#include "cmake-build-debug/mermaid_partie2.h"
-#include "cmake-build-debug/hasse.h"
+#include "cmake-build-debug/matrice.h"
+
 
 
 

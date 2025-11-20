@@ -14,4 +14,7 @@ add_executable(untitled10 main.c fonction.c
         cmake-build-debug/tarjan.h
         cmake-build-debug/mermaid_partie2.c
         cmake-build-debug/mermaid_partie2.h
+        cmake-build-debug/matrice.h
+
+
 )

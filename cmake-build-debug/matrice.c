@@ -84,4 +84,3 @@ void printmatrice(double** M, int n){
 printf("\n");
 return;
 }
-

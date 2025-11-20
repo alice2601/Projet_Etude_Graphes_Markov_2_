@@ -108,7 +108,8 @@
 				5,
 				7,
 				9,
-				11
+				11,
+				12
 			]
 		}
 	],
@@ -179,6 +180,11 @@
 		{
 			"backtrace" : 1,
 			"path" : "cmake-build-debug/mermaid_partie2.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "cmake-build-debug/matrice.h",
 			"sourceGroupIndex" : 1
 		}
 	],
