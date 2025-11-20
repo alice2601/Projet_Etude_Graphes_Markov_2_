@@ -3,7 +3,7 @@
 //
 
 
-#include "matrice.h"
+#include "matrice.h"//ici pareil je ne sais pas si il faut l'ajouter en cmakedebug ou juste normalement
 
 double** creatematricezero(int n) {
     double** M = (double**)malloc(n * sizeof(double*));

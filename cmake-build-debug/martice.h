@@ -3,7 +3,7 @@
 //
 #include <stdio.h>
 #include <stdlib.h>
-#include "tarjan.h"
+#include "tarjan.h"//je l'ai ajouté au cas où
 #include "fonction.h"
 #ifndef TP_MATRICE_H
 #define TP_MATRICE_H
