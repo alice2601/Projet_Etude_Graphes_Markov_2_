@@ -8,10 +8,11 @@
 
 
 
-
+// Prototype pour la lecture du fichier
+t_list_adjacente* lireGraph(char* filename);
 
 int main() {
-    printf("Creation manuelle d un graphe : \n");
+    /*printf("Creation manuelle d un graphe : \n");
 
     t_list_adjacente* myListADJ=create_Adj_Empty_List(2);
 
@@ -150,7 +151,53 @@ printf("\n\n PARTIE 2 : ALGORITHME DE TARJAN \n\n");
 
     // Générer le diagramme de Hasse SIMPLIFIE (sans redondances)
     generateMermaidSimplified(partition, monGraphe, "mermaid_simplifie.txt");
+**/
+    // Verification N°1 :
+    // // 1) Affichage de la matrice associé à élément
 
+    // Nom du fichier en dur
+    char* filename = "exemple_meteo.txt";
+
+    //Lecture du graphe depuis le fichier
+    t_list_adjacente* adj = lireGraph(filename);
+    if(adj == NULL){
+        printf("Erreur lecture du graphe\n");
+        return 1;
+    }
+    int n = adj->taille;
+
+    // Création de la matrice de transition
+    double** M = createtransitionmatrice(adj);
+    printf("Matrice de transition M :\n");
+    printmatrice(M, n);
+
+    // 2) Calcul de M^3
+    double** M2 = multiplymatrice(M, M, n);
+    double** M3 = multiplymatrice(M2, M, n);
+    printf("M^3 :\n");
+    printmatrice(M3, n);
+
+    // 3) Calcul de M^7
+    double** temp = creatematricezero(n);
+    copymatrice(M, temp, n);
+    for(int i=1;i<7;i++){
+        double** newtemp = multiplymatrice(temp, M, n);
+        // libération de l'ancienne matrice
+        for(int r=0;r<n;r++) free(temp[r]);
+        free(temp);
+        temp = newtemp;
+    }
+    printf("M^7 :\n");
+    printmatrice(temp, n);
+
+    // 4) Différence pour convergence
+    double epsilon = 0.01;
+    double diff = diffmatrice(M3, temp, n);
+    printf("Différence entre M^3 et M^7 = %.5f\n", diff);
+    if(diff < epsilon)
+        printf("Convergence possible vers une distribution stationnaire\n");
+    else
+        printf("Pas encore convergé\n");
 
 
     return 0;
