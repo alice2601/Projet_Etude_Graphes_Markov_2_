@@ -2,7 +2,7 @@
 // Created by alice on 19/11/2025.
 //
 
-
+#include <math.h>
 #include "matrice.h"//ici pareil je ne sais pas si il faut l'ajouter en cmakedebug ou juste normalement
 
 double** creatematricezero(int n) {

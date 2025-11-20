@@ -10,8 +10,6 @@
 
 
 
-// Prototype pour la lecture du fichier
-t_list_adjacente* lireGraph(char* filename);
 
 int main() {
     /*printf("Creation manuelle d un graphe : \n");
@@ -158,10 +156,11 @@ printf("\n\n PARTIE 2 : ALGORITHME DE TARJAN \n\n");
     // // 1) Affichage de la matrice associé à élément
 
     // Nom du fichier en dur
-    char* filename = "exemple_meteo.txt";
+
+    char* filename = "graph.txt";
 
     //Lecture du graphe depuis le fichier
-    t_list_adjacente* adj = lireGraph(filename);
+    t_list_adjacente* adj = readGraph(filename);
     if(adj == NULL){
         printf("Erreur lecture du graphe\n");
         return 1;
@@ -195,11 +194,11 @@ printf("\n\n PARTIE 2 : ALGORITHME DE TARJAN \n\n");
     // 4) Différence pour convergence
     double epsilon = 0.01;
     double diff = diffmatrice(M3, temp, n);
-    printf("Différence entre M^3 et M^7 = %.5f\n", diff);
+    printf("Difference entre M^3 et M^7 = %.5f\n", diff);
     if(diff < epsilon)
         printf("Convergence possible vers une distribution stationnaire\n");
     else
-        printf("Pas encore convergé\n");
+        printf("Pas encore converge\n");
 
 
     return 0;

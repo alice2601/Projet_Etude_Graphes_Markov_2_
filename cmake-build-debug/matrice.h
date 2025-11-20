@@ -11,7 +11,7 @@
 double** creatematricezero(int n);
 
 // ici construction de la matrice de transition à partir d’une liste d’adjacence
-double** createtransitionmatrice(t_list_adjacente* graph, int n);// là c'est soit t_class soit t_partition
+double** createtransitionmatrice(t_list_adjacente* graph);// là c'est soit t_class soit t_partition
 
 // fonction qui recopie les valeurs de A dans B (mêmes dimensions)
 void copymatrice(double** A, double** B, int n);
