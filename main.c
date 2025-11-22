@@ -167,8 +167,16 @@ printf("\n\n PARTIE 2 : ALGORITHME DE TARJAN \n\n");
     }
     int n = adj->taille;
 
-    // Création de la matrice de transition
+
+
+    // === UNE SEULE DÉCLARATION DE M ===
     double** M = createtransitionmatrice(adj);
+
+
+
+
+    // Création de la matrice de transition
+
     printf("Matrice de transition M :\n");
     printmatrice(M, n);
 
@@ -201,7 +209,63 @@ printf("\n\n PARTIE 2 : ALGORITHME DE TARJAN \n\n");
         printf("Pas encore converge\n");
 
 
-    return 0;
 
+
+
+
+
+
+    int* nb_voisins = malloc(sizeof(int) * adj->taille);
+    for (int i = 0; i < adj->taille; i++) {
+        int count = 0;
+        t_cell* current = adj->tab[i].head;
+        while (current != NULL) {
+            count++;
+            current = current->next;
+        }
+        nb_voisins[i] = count;
+    }
+
+    int** adj_tarjan = malloc(sizeof(int*) * adj->taille);
+    for (int i = 0; i < adj->taille; i++) {
+        adj_tarjan[i] = malloc(sizeof(int) * nb_voisins[i]);
+        t_cell* current = adj->tab[i].head;
+        int index = 0;
+        while (current != NULL) {
+            adj_tarjan[i][index] = current->sommet_arrive - 1;
+            index++;
+            current = current->next;
+        }
+    }
+
+
+    t_partition* partition = tarjan(adj->taille, adj_tarjan, nb_voisins);
+
+
+
+
+
+
+    // Puis l'analyse étape 2
+    analyserComposantesMarkov(M, adj->taille, partition);
+
+
+
+    // analyse étape 2
+    analyserComposantesMarkov(M, adj->taille, partition);
+
+
+    for (int i = 0; i < adj->taille; i++) {
+        free(adj_tarjan[i]);
+    }
+    free(adj_tarjan);
+    free(nb_voisins);
+
+    for (int i = 0; i < partition->nb_classes; i++) {
+        free(partition->classes[i].head);
+    }
+    free(partition->classes);
+    free(partition);
+    return 0;
 
 }

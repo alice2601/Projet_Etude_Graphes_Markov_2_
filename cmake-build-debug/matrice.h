@@ -26,4 +26,9 @@ double diffmatrice(double** M, double** N, int n);
 
 // affichage
 void printmatrice(double** M, int n);
+
+double** subMatrix(double** matrix, int n, t_partition* partition, int compo_index);
+
+void analyserComposantesMarkov(double** M, int n, t_partition* partition);
+
 #endif //TP_MATRICE_H
