@@ -27,8 +27,46 @@ double diffmatrice(double** M, double** N, int n);
 // affichage
 void printmatrice(double** M, int n);
 
+
+
+
+//ETAPE 2
+
+
+// Permet d'extraire une sous-matrice correspondant à une composante spécifique
 double** subMatrix(double** matrix, int n, t_partition* partition, int compo_index);
 
+
+//Permet de calculer la distribution stationnaire d'une composante
+void calcul_stationnaire(double** sous_matrice, int taille, double* distribution);
+
+
+
+//Permet d'analyser toutes les composantes et afficher leurs distributions stationnaires
 void analyserComposantesMarkov(double** M, int n, t_partition* partition);
+
+
+
+//ETAPE 3
+
+
+//Permet de calculer et retourner le PGCD (Plus Grand Commun Diviseur) de plusieurs valeurs
+int gcd(int* vals, int nbvals);
+
+
+
+//Permet de calculer la période d'une composante fortement connexe
+//Reopurne la période : 1 si apériodique ou >1 si périodique
+int getPeriod(double ** sub_matrix, int n);
+
+
+
+//Permet de ccalculer les distributions stationnaires périodiques
+void calculer_distribution_periodiques(double** sous_matrice, int taille, int periode, double** distributions);
+
+
+//Permeet d'analyser toutes les composantes du graphe, de calculer leur période et d'afficher les distributions stationnaires
+void analyser_composantes_periodicite(double** M, int n, t_partition* partition);
+
 
 #endif //TP_MATRICE_H

@@ -122,6 +122,16 @@ printf("\n\n PARTIE 2 : ALGORITHME DE TARJAN \n\n");
         if (!found) printf("AUCUNE CLASSE !!!\n");
     }
 
+
+
+
+
+
+
+
+
+
+
     printf("\n DIAGRAMME DE HASSE \n\n");
 
     // 5) Générer le diagramme de Hasse au format Mermaid
@@ -147,11 +157,26 @@ printf("\n\n PARTIE 2 : ALGORITHME DE TARJAN \n\n");
 
 
 
+
+
+
+
     printf("\n DIAGRAMME DE HASSE SIMPLIFIE \n");
 
     // Générer le diagramme de Hasse SIMPLIFIE (sans redondances)
     generateMermaidSimplified(partition, monGraphe, "mermaid_simplifie.txt");
 **/
+
+
+
+
+
+
+
+
+
+//PARTIE 3
+
     // Verification N°1 :
     // // 1) Affichage de la matrice associé à élément
 
@@ -266,6 +291,42 @@ printf("\n\n PARTIE 2 : ALGORITHME DE TARJAN \n\n");
     }
     free(partition->classes);
     free(partition);
+
+
+
+
+
+        // ÉTAPE 3 : Analyse AVEC périodicité
+    printf("\n");
+    printf("  ETAPE 3 : ANALYSE AVEC PERIODICITE\n");
+    analyser_composantes_periodicite(M, adj->taille, partition);
+
+    // LIBÉRATION DE LA MÉMOIRE
+    for (int i = 0; i < adj->taille; i++) {
+        free(adj_tarjan[i]);
+    }
+    free(adj_tarjan);
+    free(nb_voisins);
+
+    for (int i = 0; i < partition->nb_classes; i++) {
+        free(partition->classes[i].head);
+    }
+    free(partition->classes);
+    free(partition);
+
+    // Libération de M
+    for (int i = 0; i < n; i++) {
+        free(M[i]);
+    }
+    free(M);
+
+
+
+
     return 0;
 
 }
+
+
+
+
