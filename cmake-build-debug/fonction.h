@@ -31,25 +31,45 @@ typedef struct s_list_adjacente {
 
 
 
+//créer une cellule
 
 t_cell *createCell(int sommet_arrive, float proba);
 
+
+//créer une liste vide
 t_list* createEmptyList();
 
+
+//ajoute une cellule à la liste
 t_list* addCell(t_list *ptr_list, int sommet_arrive, float proba);
 
+
+//Affiche une liste
 void displayList(t_list* l);
 
+
+//Créer une liste adjacente vide
 t_list_adjacente* create_Adj_Empty_List(int taille);
 
+
+//Affiche une liste d'adjacense
 void displayAdjacente(t_list_adjacente* myListeAdja);
+
+
 
 t_list_adjacente* readGraph(const char *filename);
 
+
+
+//vérifier si on a bien un graphe de Markov
 void verifiersigraphMarkov(t_list_adjacente* mongraphe);
 
+
+//Transforme les sommets (des nombres) en chiffres
 char* getId(int num);
 
+
+//Génère un fichier mermaid
 void generateMermaidFile(t_list_adjacente* graphe, const char* output_filename);
 
 

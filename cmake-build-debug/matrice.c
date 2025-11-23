@@ -163,7 +163,7 @@ void analyserComposantesMarkov(double** M, int n, t_partition* partition) {
 
 
     if (partition == NULL || partition->nb_classes == 0) {
-        printf("Aucune composante trouvée dans le graphe.\n");
+        printf("Aucune composante trouvee dans le graphe.\n");
         return;
     }
 
@@ -199,7 +199,7 @@ void analyserComposantesMarkov(double** M, int n, t_partition* partition) {
             printf("  Sommet %d: %.4f\n", comp.head[i].id, stationary[i]);
             sum += stationary[i];
         }
-        printf("  Somme des probabilités: %.6f\n", sum);
+        printf("  Somme des probabilites: %.6f\n", sum);
 
         // Analyser le type de composante
         if (comp.nb_sommets == 1) {

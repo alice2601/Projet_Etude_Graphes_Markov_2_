@@ -15,9 +15,8 @@ typedef struct {
     int nb_links;
 } t_link_array;
 
-/**
- * Crée un tableau vide de liens
- */
+
+
 t_link_array* createLinkArray() {
     t_link_array* array = malloc(sizeof(t_link_array));
     array->links = NULL;
@@ -25,9 +24,9 @@ t_link_array* createLinkArray() {
     return array;
 }
 
-/**
- * Vérifie si un lien existe déjà dans le tableau
- */
+
+
+
 bool linkExists(t_link_array* array, int depart, int arrivee) {
     for (int i = 0; i < array->nb_links; i++) {
         if (array->links[i].classe_depart == depart &&
@@ -38,9 +37,9 @@ bool linkExists(t_link_array* array, int depart, int arrivee) {
     return false;
 }
 
-/**
- * Ajoute un lien au tableau s'il n'existe pas déjà
- */
+
+
+
 void addLink(t_link_array* array, int depart, int arrivee) {
     if (!linkExists(array, depart, arrivee)) {
         array->nb_links++;
@@ -50,11 +49,9 @@ void addLink(t_link_array* array, int depart, int arrivee) {
     }
 }
 
-/**
- * Crée un tableau qui indique pour chaque sommet du graphe
- * la classe à laquelle il appartient
- * Retourne un tableau de taille nb_sommets où tableau[i] = numéro de la classe du sommet i+1
- */
+
+
+
 int* createSommetToClasseMapping(t_partition* partition, int nb_sommets) {
     int* mapping = malloc(sizeof(int) * nb_sommets);
 
@@ -75,17 +72,9 @@ int* createSommetToClasseMapping(t_partition* partition, int nb_sommets) {
     return mapping;
 }
 
-/**
- * Recense tous les liens entre classes
- * Algorithme :
- * Pour chaque sommet i du graphe
- *   Ci = classe à laquelle appartient i
- *   Pour tous les sommets j dans la liste d'adjacence du sommet i
- *     Cj = classe à laquelle appartient j
- *     Si Ci différent de Cj (arête entre classes)
- *       Si le lien (Ci,Cj) n'existe pas
- *         Ajouter le lien (Ci,Cj)
- */
+
+
+
 t_link_array* findClassLinks(t_partition* partition, t_list_adjacente* graphe) {
     t_link_array* links = createLinkArray();
 
@@ -115,11 +104,9 @@ t_link_array* findClassLinks(t_partition* partition, t_list_adjacente* graphe) {
     return links;
 }
 
-/**
- * Génère le diagramme de Hasse au format Mermaid
- * Affiche les classes (composantes) et les liens entre elles
- * Format identique à la partie 1
- */
+
+
+
 void generateHasseMermaidFile(t_partition* partition, t_list_adjacente* graphe, const char* output_filename) {
     if (partition == NULL || graphe == NULL) {
         printf("Erreur : partition ou graphe NULL\n");
@@ -186,7 +173,7 @@ void generateHasseMermaidFile(t_partition* partition, t_list_adjacente* graphe, 
 
     fclose(file);
 
-    printf("\n=== FIN DEBUG ===\n");
+    printf("\n FIN DEBUG \n");
     printf("Diagramme de Hasse genere dans '%s'\n", output_filename);
     printf("Nombre de classes : %d\n", partition->nb_classes);
     printf("Nombre de liens entre classes : %d\n", links->nb_links);
@@ -196,9 +183,8 @@ void generateHasseMermaidFile(t_partition* partition, t_list_adjacente* graphe, 
     free(links);
 }
 
-/**
- * Affiche les caractéristiques du graphe (Étape 3 de la partie 2)
- */
+
+
 void displayGraphCharacteristics(t_partition* partition, t_list_adjacente* graphe) {
     if (partition == NULL || graphe == NULL) {
         printf("Erreur : partition ou graphe NULL\n");

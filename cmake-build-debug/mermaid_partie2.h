@@ -22,44 +22,33 @@ typedef struct {
     int nb_links;
 } t_link_array;
 
-/**
- * Crée un tableau vide de liens
- */
+
+
+//Création d'un tableau vide
 t_link_array* createLinkArray();
 
-/**
- * Vérifie si un lien existe déjà dans le tableau
- */
+
+//Permet de vérifier si un lien est délà existant dans le tableau
 bool linkExists(t_link_array* array, int depart, int arrivee);
 
-/**
- * Ajoute un lien au tableau s'il n'existe pas déjà
- */
+
+//création d'un lien s'il n'existe pas
 void addLink(t_link_array* array, int depart, int arrivee);
 
-/**
- * Crée un tableau qui indique pour chaque sommet du graphe
- * la classe à laquelle il appartient
- */
+
+// Permet de créer un tableau indiquet la classe de chaque sommet du graphe
 int* createSommetToClasseMapping(t_partition* partition, int nb_sommets);
 
-/**
- * Recense tous les liens entre classes selon l'algorithme du sujet
- */
+
+//Permet de faire l'inventaire de tous les liens entre les classes
 t_link_array* findClassLinks(t_partition* partition, t_list_adjacente* graphe);
 
-/**
- * Génère le diagramme de Hasse au format Mermaid
- * à partir d'une partition et du graphe original
- */
+
+//Permet de génerer le diagramme grâce aux partitions
 void generateHasseMermaidFile(t_partition* partition, t_list_adjacente* graphe, const char* output_filename);
 
-/**
- * Affiche les caractéristiques du graphe (Étape 3)
- * - Classes transitoires/persistantes
- * - États absorbants
- * - Irréductibilité
- */
+
+//Permet d'afficher les caractéristiques du graphe (transitoires/persistantes, états absorbants, irréductibilité)
 void displayGraphCharacteristics(t_partition* partition, t_list_adjacente* graphe);
 
 #endif //UNTITLED10_MERMAID_PARTIE2_H

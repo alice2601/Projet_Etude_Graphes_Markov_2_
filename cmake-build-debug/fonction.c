@@ -104,13 +104,8 @@ t_list_adjacente* readGraph(const char *filename) {
     return mongraphe;
 }
 
-/*
- * On vérifie si un graphe est un graphe de Markov.
- * Pour chaque sommet i : on additionne toutes les probabilités des arêtes sortantes
-et on vérifie que la somme est entre 0.99 et 1.00 (inclus)
- * /!\ Si un sommet n'est pas valide, on l'affiche lui et sa somme.
- * Sinon on affiche que le graphe est un graphe de Markov.
- */
+
+
 void verifiersigraphMarkov(t_list_adjacente* mongraphe) {
     if (mongraphe == NULL) {
         printf("Le graphe est vide, il n'y a rien a verifier.\n");
@@ -140,13 +135,8 @@ void verifiersigraphMarkov(t_list_adjacente* mongraphe) {
     }
 }
 
-/*
- * Fonction getId : convertit un numéro de sommet en identifiant alphabétique
- * 1 -> "A", 2 -> "B", ...
- * Buffer --  stocker identifiant
- * Conversion en base 26 (comme Excel : A, B, ..., Z, AA, AB, ...)
- * puis inverser la chaîne car on l'a construite à l'envers
- */
+
+
 char* getId(int num) {
     static char buffers[100][3];  // Multiple buffers
     static int counter = 0;
@@ -171,12 +161,7 @@ char* getId(int num) {
 
 
 
-/*
- * Fonction generateMermaidFile : génère un fichier texte au format Mermaid
- * à partir d'une liste d'adjacence (graphe de Markov)
- * puis on va écrire l'en-tête du fichier Mermaid
- * ensuite on va déclarer tous les sommets avec leurs numéros + écrire toutes les arêtes avec leurs probabilités
- */
+
 void generateMermaidFile(t_list_adjacente* graphe, const char* output_filename) {
     if (graphe == NULL) {
         printf("Erreur : le graphe est NULL\n");
