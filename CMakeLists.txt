@@ -16,6 +16,8 @@ add_executable(untitled10 main.c fonction.c
         cmake-build-debug/mermaid_partie2.h
         cmake-build-debug/matrice.h
         cmake-build-debug/matrice.c
+        cmake-build-debug/proba.h
+        cmake-build-debug/proba.c
 
 
 )

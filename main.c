@@ -2,15 +2,21 @@
 #include "cmake-build-debug/mermaid_partie2.h"
 #include "cmake-build-debug/hasse.h"
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <tgmath.h>
+#include <math.h>
+
 
 #include "cmake-build-debug/fonction.h"
 #include "cmake-build-debug/stack.h"
 #include "cmake-build-debug/matrice.h"
+#include "cmake-build-debug/proba.h"
 
 
 
 
-
+/*
 int main() {
     /*printf("Creation manuelle d un graphe : \n");
 
@@ -173,160 +179,334 @@ printf("\n\n PARTIE 2 : ALGORITHME DE TARJAN \n\n");
 
 
 
+    /*
+
+    //PARTIE 3
+
+        // Verification N°1 :
+        // // 1) Affichage de la matrice associé à élément
+
+        // Nom du fichier en dur
+
+        char* filename = "graph.txt";
+
+        //Lecture du graphe depuis le fichier
+        t_list_adjacente* adj = readGraph(filename);
+        if(adj == NULL){
+            printf("Erreur lecture du graphe\n");
+            return 1;
+        }
+        int n = adj->taille;
 
 
-//PARTIE 3
 
-    // Verification N°1 :
-    // // 1) Affichage de la matrice associé à élément
+        // === UNE SEULE DÉCLARATION DE M ===
+        double** M = createtransitionmatrice(adj);
 
-    // Nom du fichier en dur
 
-    char* filename = "graph.txt";
 
-    //Lecture du graphe depuis le fichier
+
+        // Création de la matrice de transition
+
+        printf("Matrice de transition M :\n");
+        printmatrice(M, n);
+
+        // 2) Calcul de M^3
+        double** M2 = multiplymatrice(M, M, n);
+        double** M3 = multiplymatrice(M2, M, n);
+        printf("M^3 :\n");
+        printmatrice(M3, n);
+
+        // 3) Calcul de M^7
+        double** temp = creatematricezero(n);
+        copymatrice(M, temp, n);
+        for(int i=1;i<7;i++){
+            double** newtemp = multiplymatrice(temp, M, n);
+            // libération de l'ancienne matrice
+            for(int r=0;r<n;r++) free(temp[r]);
+            free(temp);
+            temp = newtemp;
+        }
+        printf("M^7 :\n");
+        printmatrice(temp, n);
+
+        // 4) Différence pour convergence
+        double epsilon = 0.01;
+        double diff = diffmatrice(M3, temp, n);
+        printf("Difference entre M^3 et M^7 = %.5f\n", diff);
+        if(diff < epsilon)
+            printf("Convergence possible vers une distribution stationnaire\n");
+        else
+            printf("Pas encore converge\n");
+
+
+
+
+
+
+
+
+        int* nb_voisins = malloc(sizeof(int) * adj->taille);
+        for (int i = 0; i < adj->taille; i++) {
+            int count = 0;
+            t_cell* current = adj->tab[i].head;
+            while (current != NULL) {
+                count++;
+                current = current->next;
+            }
+            nb_voisins[i] = count;
+        }
+
+        int** adj_tarjan = malloc(sizeof(int*) * adj->taille);
+        for (int i = 0; i < adj->taille; i++) {
+            adj_tarjan[i] = malloc(sizeof(int) * nb_voisins[i]);
+            t_cell* current = adj->tab[i].head;
+            int index = 0;
+            while (current != NULL) {
+                adj_tarjan[i][index] = current->sommet_arrive - 1;
+                index++;
+                current = current->next;
+            }
+        }
+
+
+        t_partition* partition = tarjan(adj->taille, adj_tarjan, nb_voisins);
+
+
+
+
+
+
+        // Puis l'analyse étape 2
+        analyserComposantesMarkov(M, adj->taille, partition);
+
+
+
+        // analyse étape 2
+        analyserComposantesMarkov(M, adj->taille, partition);
+
+
+        for (int i = 0; i < adj->taille; i++) {
+            free(adj_tarjan[i]);
+        }
+        free(adj_tarjan);
+        free(nb_voisins);
+
+        for (int i = 0; i < partition->nb_classes; i++) {
+            free(partition->classes[i].head);
+        }
+        free(partition->classes);
+        free(partition);
+
+
+
+
+
+            // ÉTAPE 3 : Analyse AVEC périodicité
+        printf("\n");
+        printf("  ETAPE 3 : ANALYSE AVEC PERIODICITE\n");
+        analyser_composantes_periodicite(M, adj->taille, partition);
+
+        // LIBÉRATION DE LA MÉMOIRE
+        for (int i = 0; i < adj->taille; i++) {
+            free(adj_tarjan[i]);
+        }
+        free(adj_tarjan);
+        free(nb_voisins);
+
+        for (int i = 0; i < partition->nb_classes; i++) {
+            free(partition->classes[i].head);
+        }
+        free(partition->classes);
+        free(partition);
+
+        // Libération de M
+        for (int i = 0; i < n; i++) {
+            free(M[i]);
+        }
+        free(M);
+
+
+
+
+        return 0;
+
+    }
+    **/
+int main() {
+// Question 1a:
+// __________________
+
+    // 1) Lecture du graphe depuis fichier
+
+    char* filename = "matrix27.txt"; // nom du fichier contenant le graphe pondéré
+
+    // Lecture du graphe dans une liste d'adjacence
     t_list_adjacente* adj = readGraph(filename);
-    if(adj == NULL){
-        printf("Erreur lecture du graphe\n");
+    if (adj == NULL) { // vérifier si le fichier est bien lu
+        printf("Erreur lecture graphe\n");
         return 1;
     }
-    int n = adj->taille;
+    int n = adj->taille; // nombre de sommets
+// Explication : readGraph retourne une t_list_adjacente* qui contient le grpahe lu depuis le fichier
+                // Et adj-> taille donne le nombre de sommets
 
+    // 2) Création de la matrice de transition
 
-
-    // === UNE SEULE DÉCLARATION DE M ===
+    // On transforme la liste d'adjacence en matrice de transition M[n][n]
     double** M = createtransitionmatrice(adj);
 
-
-
-
-    // Création de la matrice de transition
-
     printf("Matrice de transition M :\n");
-    printmatrice(M, n);
+    printmatrice(M, n); // affichage de la matrice pour vérifier
+// Explications : createtransitionmatrice transforme la liste d'adjacence en matrice nxn de probabilités
 
-    // 2) Calcul de M^3
-    double** M2 = multiplymatrice(M, M, n);
-    double** M3 = multiplymatrice(M2, M, n);
-    printf("M^3 :\n");
-    printmatrice(M3, n);
+    // 3) Initialisation du vecteur de départ
 
-    // 3) Calcul de M^7
-    double** temp = creatematricezero(n);
-    copymatrice(M, temp, n);
-    for(int i=1;i<7;i++){
-        double** newtemp = multiplymatrice(temp, M, n);
-        // libération de l'ancienne matrice
-        for(int r=0;r<n;r++) free(temp[r]);
-        free(temp);
-        temp = newtemp;
-    }
-    printf("M^7 :\n");
-    printmatrice(temp, n);
+    // On commence dans l'état 2
+    double* dist = (double*)malloc(n * sizeof(double));
+    for (int i = 0; i < n; i++) dist[i] = 0.0; // tout à 0
+    dist[1] = 1.0; // état 2 = probabilité 1
+// Explications : On initialise le vecteur de dostribution avec 1.0 à l'état 2
+    // Pourquoi ? Car les indices en C commencent à 0, donc l'état 2 -> index 1
 
-    // 4) Différence pour convergence
-    double epsilon = 0.01;
-    double diff = diffmatrice(M3, temp, n);
-    printf("Difference entre M^3 et M^7 = %.5f\n", diff);
-    if(diff < epsilon)
-        printf("Convergence possible vers une distribution stationnaire\n");
-    else
-        printf("Pas encore converge\n");
+    // 4) Calcul des distributions après n pas
 
+    int pas[] = {1, 2, 10, 50}; // nombres de pas à calculer
 
+    for (int k = 0; k < 4; k++) {
+        // On copie la distribution initiale
+        double* dist_n = (double*)malloc(n * sizeof(double));
+        for (int i = 0; i < n; i++) dist_n[i] = dist[i];
 
-
-
-
-
-
-    int* nb_voisins = malloc(sizeof(int) * adj->taille);
-    for (int i = 0; i < adj->taille; i++) {
-        int count = 0;
-        t_cell* current = adj->tab[i].head;
-        while (current != NULL) {
-            count++;
-            current = current->next;
+        // On multiplie dist_n par la matrice M pour chaque pas
+        for (int step = 0; step < pas[k]; step++) {
+            double* next = (double*)malloc(n * sizeof(double));
+            for (int i = 0; i < n; i++) {
+                next[i] = 0.0;
+                // produit matrice × vecteur
+                for (int j = 0; j < n; j++) {
+                    next[i] += dist_n[j] * M[j][i];
+                }
+            }
+            free(dist_n); // libérer l'ancienne distribution
+            dist_n = next; // passer à la distribution suivante
         }
-        nb_voisins[i] = count;
-    }
 
-    int** adj_tarjan = malloc(sizeof(int*) * adj->taille);
-    for (int i = 0; i < adj->taille; i++) {
-        adj_tarjan[i] = malloc(sizeof(int) * nb_voisins[i]);
-        t_cell* current = adj->tab[i].head;
-        int index = 0;
-        while (current != NULL) {
-            adj_tarjan[i][index] = current->sommet_arrive - 1;
-            index++;
-            current = current->next;
+        // Affichage de la distribution après n pas
+        printf("\nDistribution apres n = %d pas :\n", pas[k]);
+        for (int i = 0; i < n; i++) {
+            printf("État %d : %.5f\n", i+1, dist_n[i]);
+        }
+
+        free(dist_n); // libération mémoire pour ce calcul
+    }
+    // Explication : Pour chaque nombre de pas n, on multiplie le vecteur par la matrice M n fois
+    // Chaque multiplication représente un pas de Markov
+
+
+    // 5) Vérification de la distribution limite
+
+    // On réinitialise la distribution
+    double* dist_limite = (double*)malloc(n * sizeof(double));
+    for (int i = 0; i < n; i++) dist_limite[i] = dist[i];
+
+    int convergent = 0; // drapeau de convergence
+
+    for (int step = 1; step <= 1000; step++) { // on itère jusqu'à 1000 pas max
+        double* next = (double*)malloc(n * sizeof(double));
+        for (int i = 0; i < n; i++) {
+            next[i] = 0.0;
+            for (int j = 0; j < n; j++) {
+                next[i] += dist_limite[j] * M[j][i]; // multiplication vecteur × matrice
+            }
+        }
+
+        // Calcul de la différence pour tester la convergence
+        double diff = 0.0;
+        for (int i = 0; i < n; i++) {
+            diff += fabs((double)(next[i] - dist_limite[i]));
+            dist_limite[i] = next[i]; // mise à jour
+        }
+
+        free(next);
+
+        // Si la différence est très petite, on considère que c'est la distribution limite
+        if (diff < 1e-6) {
+            convergent = 1;
+            break;
         }
     }
 
-
-    t_partition* partition = tarjan(adj->taille, adj_tarjan, nb_voisins);
-
-
-
-
-
-
-    // Puis l'analyse étape 2
-    analyserComposantesMarkov(M, adj->taille, partition);
-
-
-
-    // analyse étape 2
-    analyserComposantesMarkov(M, adj->taille, partition);
-
-
-    for (int i = 0; i < adj->taille; i++) {
-        free(adj_tarjan[i]);
+    // Affichage de la distribution limite si convergence
+    if (convergent) {
+        printf("\nDistribution limite :\n");
+        for (int i = 0; i < n; i++) {
+            printf("État %d : %.5f\n", i+1, dist_limite[i]);
+        }
+    } else {
+        printf("\nPas de distribution limite detectee\n");
     }
-    free(adj_tarjan);
-    free(nb_voisins);
-
-    for (int i = 0; i < partition->nb_classes; i++) {
-        free(partition->classes[i].head);
-    }
-    free(partition->classes);
-    free(partition);
+    // Explication : On itère jusqu'à convergence (diff < 1e-6) ou un nombre max d'iterantions
+    // Si convergé, on affiche la distribution limite
 
 
+    // 6) Libération mémoire
 
-
-
-        // ÉTAPE 3 : Analyse AVEC périodicité
-    printf("\n");
-    printf("  ETAPE 3 : ANALYSE AVEC PERIODICITE\n");
-    analyser_composantes_periodicite(M, adj->taille, partition);
-
-    // LIBÉRATION DE LA MÉMOIRE
-    for (int i = 0; i < adj->taille; i++) {
-        free(adj_tarjan[i]);
-    }
-    free(adj_tarjan);
-    free(nb_voisins);
-
-    for (int i = 0; i < partition->nb_classes; i++) {
-        free(partition->classes[i].head);
-    }
-    free(partition->classes);
-    free(partition);
-
-    // Libération de M
-    for (int i = 0; i < n; i++) {
-        free(M[i]);
-    }
+    free(dist);
+    free(dist_limite);
+    for (int i = 0; i < n; i++) free(M[i]);
     free(M);
+    // POurquoi ? Car important pour éviter les fuites mémoire avec tts les allocation malloc
 
 
+    // Question 1b :
+    // Tracer la matrice
+    // Pour ça je vais devoir créer un graph qu'on va devoir exporter sur excel pour le tracer car sur CLION on ne peut pas
 
+
+    // Etape 1 : Export des distributions pour tracer ΠA(n) en fonction de n
+    FILE* f = fopen("distributions.csv", "w");
+    if (!f) {
+        printf("Erreur création fichier distributions.csv\n");
+    } else {
+        // En-tête CSV : états
+        fprintf(f, "n");
+        for (int i = 0; i < n; i++) {
+            fprintf(f, ";Etat%d", i+1);
+        }
+        fprintf(f, "\n");
+
+        // Etape 2 : On parcourt les mêmes pas que pour la question 1a
+        int max_pas = 50; // pour avoir un graphe continu, on peut calculer tous les pas jusqu'à 50
+        double* dist_n = (double*)malloc(n * sizeof(double));
+        for (int i = 0; i < n; i++) dist_n[i] = dist[i]; // état initial
+
+        for (int step = 0; step <= max_pas; step++) {
+            // écrire la distribution pour ce pas
+            fprintf(f, "%d", step);
+            for (int i = 0; i < n; i++) {
+                fprintf(f, ";%.5f", dist_n[i]);
+            }
+            fprintf(f, "\n");
+
+            // calcul de la distribution suivante
+            double* next = (double*)malloc(n * sizeof(double));
+            for (int i = 0; i < n; i++) {
+                next[i] = 0.0;
+                for (int j = 0; j < n; j++) {
+                    next[i] += dist_n[j] * M[j][i];
+                }
+            }
+            free(dist_n);
+            dist_n = next;
+        }
+
+        free(dist_n);
+        fclose(f);
+        printf("\nLes distributions ΠA(n) ont ete exportees dans distributions.csv pour trace.\n");
+// Ne reste plus qu'à tout mettre sur excel
+
+    }
 
     return 0;
-
 }
-
-
-
-

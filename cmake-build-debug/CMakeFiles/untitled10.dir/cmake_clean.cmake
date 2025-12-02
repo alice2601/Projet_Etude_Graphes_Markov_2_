@@ -9,6 +9,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/untitled10.dir/matrice.c.obj.d"
   "CMakeFiles/untitled10.dir/mermaid_partie2.c.obj"
   "CMakeFiles/untitled10.dir/mermaid_partie2.c.obj.d"
+  "CMakeFiles/untitled10.dir/proba.c.obj"
+  "CMakeFiles/untitled10.dir/proba.c.obj.d"
   "CMakeFiles/untitled10.dir/stack.c.obj"
   "CMakeFiles/untitled10.dir/stack.c.obj.d"
   "CMakeFiles/untitled10.dir/tarjan.c.obj"
