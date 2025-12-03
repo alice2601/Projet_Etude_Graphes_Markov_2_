@@ -333,182 +333,135 @@ printf("\n\n PARTIE 2 : ALGORITHME DE TARJAN \n\n");
 
     }
     **/
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+#include <direct.h>  // pour _mkdir sous Windows
+#include "tarjan.h"  // ou autre header nécessaire pour readGraph, etc.
+
+// Fonction utilitaire pour créer un dossier si nécessaire
+void make_dir(const char* dirname) {
+    _mkdir(dirname); // Windows
+}
+
 int main() {
-// Question 1a:
-// __________________
-
     // 1) Lecture du graphe depuis fichier
-
-    char* filename = "matrix27.txt"; // nom du fichier contenant le graphe pondéré
-
-    // Lecture du graphe dans une liste d'adjacence
+    char* filename = "matrix27.txt";
     t_list_adjacente* adj = readGraph(filename);
-    if (adj == NULL) { // vérifier si le fichier est bien lu
-        printf("Erreur lecture graphe\n");
+    if (adj == NULL) {
+        printf("\nErreur lecture graphe\n");
         return 1;
     }
 
     int n = adj->taille; // nombre de sommets
-// Explication : readGraph retourne une t_list_adjacente* qui contient le grpahe lu depuis le fichier
-                // Et adj-> taille donne le nombre de sommets
+    printf("\nNombre d'états : %d\n", n);
 
     // 2) Création de la matrice de transition
-
-    // On transforme la liste d'adjacence en matrice de transition M[n][n]
     double** M = createtransitionmatrice(adj);
+    printf("\nMatrice de transition M :\n");
+    printmatrice(M, n);
 
-    printf("Matrice de transition M :\n");
-    printmatrice(M, n); // affichage de la matrice pour vérifier
-// Explications : createtransitionmatrice transforme la liste d'adjacence en matrice nxn de probabilités
-
-    // 3) Initialisation du vecteur de départ
-
-    // On commence dans l'état 2
+    // 3) Initialisation du vecteur de départ (état 2 à 1)
     double* dist = (double*)malloc(n * sizeof(double));
-    for (int i = 0; i < n; i++) dist[i] = 0.0; // tout à 0
-    dist[1] = 1.0; // état 2 = probabilité 1
-// Explications : On initialise le vecteur de dostribution avec 1.0 à l'état 2
-    // Pourquoi ? Car les indices en C commencent à 0, donc l'état 2 -> index 1
+    for (int i = 0; i < n; i++) dist[i] = 0.0;
+    dist[1] = 1.0; // état 2
 
-    // 4) Calcul des distributions après n pas
+    // 4) Calcul des distributions pour n = 1,2,10,50
+    int pas[] = {1, 2, 10, 50};
 
-    int pas[] = {1, 2, 10, 50}; // nombres de pas à calculer
+    make_dir("csv"); // créer le dossier parent pour CSV
 
     for (int k = 0; k < 4; k++) {
-        // On copie la distribution initiale
+        int n_pas = pas[k];
+
+        // Création du dossier pour ce nombre de pas
+        char dir_name[64];
+        sprintf(dir_name, "csv/n=%d", n_pas);
+        make_dir(dir_name);
+
+        // Copie de la distribution initiale
         double* dist_n = (double*)malloc(n * sizeof(double));
         for (int i = 0; i < n; i++) dist_n[i] = dist[i];
 
-        // On multiplie dist_n par la matrice M pour chaque pas
-        for (int step = 0; step < pas[k]; step++) {
-            double* next = (double*)malloc(n * sizeof(double));
-            for (int i = 0; i < n; i++) {
-                next[i] = 0.0;
-                // produit matrice × vecteur
-                for (int j = 0; j < n; j++) {
-                    next[i] += dist_n[j] * M[j][i];
-                }
-            }
-            free(dist_n); // libérer l'ancienne distribution
-            dist_n = next; // passer à la distribution suivante
-        }
-
-        // Affichage de la distribution après n pas
-        printf("\nDistribution apres n = %d pas :\n", pas[k]);
-        for (int i = 0; i < n; i++) {
-            printf("État %d : %.5f\n", i+1, dist_n[i]);
-        }
-
-        free(dist_n); // libération mémoire pour ce calcul
-    }
-    // Explication : Pour chaque nombre de pas n, on multiplie le vecteur par la matrice M n fois
-    // Chaque multiplication représente un pas de Markov
-
-
-    // 5) Vérification de la distribution limite
-
-    // On réinitialise la distribution
-    double* dist_limite = (double*)malloc(n * sizeof(double));
-    for (int i = 0; i < n; i++) dist_limite[i] = dist[i];
-
-    int convergent = 0; // drapeau de convergence
-
-    for (int step = 1; step <= 1000; step++) { // on itère jusqu'à 1000 pas max
-        double* next = (double*)malloc(n * sizeof(double));
-        for (int i = 0; i < n; i++) {
-            next[i] = 0.0;
-            for (int j = 0; j < n; j++) {
-                next[i] += dist_limite[j] * M[j][i]; // multiplication vecteur × matrice
-            }
-        }
-
-        // Calcul de la différence pour tester la convergence
-        double diff = 0.0;
-        for (int i = 0; i < n; i++) {
-            diff += fabs((double)(next[i] - dist_limite[i]));
-            dist_limite[i] = next[i]; // mise à jour
-        }
-
-        free(next);
-
-        // Si la différence est très petite, on considère que c'est la distribution limite
-        if (diff < 1e-6) {
-            convergent = 1;
-            break;
-        }
-    }
-
-    // Affichage de la distribution limite si convergence
-    if (convergent) {
-        printf("\nDistribution limite :\n");
-        for (int i = 0; i < n; i++) {
-            printf("État %d : %.5f\n", i+1, dist_limite[i]);
-        }
-    } else {
-        printf("\nPas de distribution limite detectee\n");
-    }
-    // Explication : On itère jusqu'à convergence (diff < 1e-6) ou un nombre max d'iterantions
-    // Si convergé, on affiche la distribution limite
-
-
-
-
-
-    // Question 1b :
-    // Tracer la matrice
-    // Pour ça je vais devoir créer un graph qu'on va devoir exporter sur excel pour le tracer car sur CLION on ne peut pas
-
-
-    // Etape 1 : Export des distributions pour tracer ΠA(n) en fonction de n
-    FILE* f = fopen("distributions.csv", "w");
-    if (!f) {
-        printf("Erreur création fichier distributions.csv\n");
-    } else {
-        // En-tête CSV : états
-        fprintf(f, "n");
-        for (int i = 0; i < n; i++) {
-            fprintf(f, ";Etat%d", i+1);
-        }
-        fprintf(f, "\n");
-
-        // Etape 2 : On parcourt les mêmes pas que pour la question 1a
-        int max_pas = 50; // pour avoir un graphe continu, on peut calculer tous les pas jusqu'à 50
-        double* dist_n = (double*)malloc(n * sizeof(double));
-        for (int i = 0; i < n; i++) dist_n[i] = dist[i]; // état initial
-
-        for (int step = 0; step <= max_pas; step++) {
-            // écrire la distribution pour ce pas
-            fprintf(f, "%d", step);
-            for (int i = 0; i < n; i++) {
-                fprintf(f, ";%.5f", dist_n[i]);
-            }
-            fprintf(f, "\n");
-
-            // calcul de la distribution suivante
+        // Multiplication matrice × vecteur
+        for (int step = 0; step < n_pas; step++) {
             double* next = (double*)malloc(n * sizeof(double));
             for (int i = 0; i < n; i++) {
                 next[i] = 0.0;
                 for (int j = 0; j < n; j++) {
-                    next[i] += dist_n[j] * M[i][j];
+                    next[i] += dist_n[j] * M[j][i]; // CORRECTION ici
                 }
             }
             free(dist_n);
             dist_n = next;
         }
 
-        free(dist_n);
-        fclose(f);
-        printf("\nLes distributions ΠA(n) ont ete exportees dans distributions.csv pour trace.\n");
-// Ne reste plus qu'à tout mettre sur excel
+        // Affichage
+        printf("\nDistribution apres n=%d pas :\n", n_pas);
+        for (int i = 0; i < n; i++) {
+            printf("Etat %d : %.5f\n", i+1, dist_n[i]);
+        }
 
+        // Export CSV
+        char file_name[128];
+        sprintf(file_name, "%s/distributions.csv", dir_name);
+        FILE* f = fopen(file_name, "w");
+        if (!f) {
+            printf("\nErreur création fichier %s\n", file_name);
+        } else {
+            fprintf(f, "Etat;Probabilite\n");
+            for (int i = 0; i < n; i++) {
+                fprintf(f, "Etat%d;%.5f\n", i+1, dist_n[i]);
+            }
+            fclose(f);
+            printf("Distribution exportee dans %s\n", file_name);
+        }
+
+        free(dist_n);
+    }
+
+    // 5) Vérification de la distribution limite
+    double* dist_limite = (double*)malloc(n * sizeof(double));
+    for (int i = 0; i < n; i++) dist_limite[i] = dist[i];
+
+    int convergent = 0;
+    for (int step = 1; step <= 1000; step++) {
+        double* next = (double*)malloc(n * sizeof(double));
+        for (int i = 0; i < n; i++) {
+            next[i] = 0.0;
+            for (int j = 0; j < n; j++) {
+                next[i] += dist_limite[j] * M[j][i];
+            }
+        }
+
+        double diff = 0.0;
+        for (int i = 0; i < n; i++) {
+            diff += fabs(next[i] - dist_limite[i]);
+            dist_limite[i] = next[i];
+        }
+        free(next);
+
+        if (diff < 1e-6) {
+            convergent = 1;
+            break;
+        }
+    }
+
+    if (convergent) {
+        printf("\nDistribution limite :\n");
+        for (int i = 0; i < n; i++) {
+            printf("Etat %d : %.5f\n", i+1, dist_limite[i]);
+        }
+    } else {
+        printf("\nPas de distribution limite detectee\n");
     }
 
     // 6) Libération mémoire
-
     free(dist);
     free(dist_limite);
 
-    // POurquoi ? Car important pour éviter les fuites mémoire avec tts les allocation malloc
+    for (int i = 0; i < n; i++) free(M[i]);
+    free(M);
 
 
     // Q 2:

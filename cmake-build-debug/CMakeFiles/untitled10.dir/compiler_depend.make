@@ -73,7 +73,9 @@ CMakeFiles/untitled10.dir/main.c.obj: C:/Users/alice/CLionProjects/Projet_Etude_
   C:/Program\ Files/JetBrains/CLion\ 2025.2/bin/mingw/x86_64-w64-mingw32/include/corecrt_stdio_config.h \
   C:/Program\ Files/JetBrains/CLion\ 2025.2/bin/mingw/x86_64-w64-mingw32/include/corecrt_wstdlib.h \
   C:/Program\ Files/JetBrains/CLion\ 2025.2/bin/mingw/x86_64-w64-mingw32/include/crtdefs.h \
+  C:/Program\ Files/JetBrains/CLion\ 2025.2/bin/mingw/x86_64-w64-mingw32/include/direct.h \
   C:/Program\ Files/JetBrains/CLion\ 2025.2/bin/mingw/x86_64-w64-mingw32/include/errno.h \
+  C:/Program\ Files/JetBrains/CLion\ 2025.2/bin/mingw/x86_64-w64-mingw32/include/io.h \
   C:/Program\ Files/JetBrains/CLion\ 2025.2/bin/mingw/x86_64-w64-mingw32/include/limits.h \
   C:/Program\ Files/JetBrains/CLion\ 2025.2/bin/mingw/x86_64-w64-mingw32/include/malloc.h \
   C:/Program\ Files/JetBrains/CLion\ 2025.2/bin/mingw/x86_64-w64-mingw32/include/math.h \
@@ -273,6 +275,8 @@ C:/Program\ Files/JetBrains/CLion\ 2025.2/bin/mingw/x86_64-w64-mingw32/include/s
 
 C:/Users/alice/CLionProjects/Projet_Etude_Graphes_Markov/fonction.c:
 
+C:/Program\ Files/JetBrains/CLion\ 2025.2/bin/mingw/x86_64-w64-mingw32/include/direct.h:
+
 C:/Program\ Files/JetBrains/CLion\ 2025.2/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/mm_malloc.h:
 
 C:/Program\ Files/JetBrains/CLion\ 2025.2/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/syslimits.h:
@@ -336,6 +340,8 @@ C:/Users/alice/CLionProjects/Projet_Etude_Graphes_Markov/tarjan.h:
 C:/Program\ Files/JetBrains/CLion\ 2025.2/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/tgmath.h:
 
 C:/Program\ Files/JetBrains/CLion\ 2025.2/bin/mingw/x86_64-w64-mingw32/include/complex.h:
+
+C:/Program\ Files/JetBrains/CLion\ 2025.2/bin/mingw/x86_64-w64-mingw32/include/io.h:
 
 C:/Users/alice/CLionProjects/Projet_Etude_Graphes_Markov/tarjan.c:
 
