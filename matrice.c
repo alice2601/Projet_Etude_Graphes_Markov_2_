@@ -3,7 +3,7 @@
 //
 
 #include <math.h>
-#include "matrice.h"//ici pareil je ne sais pas si il faut l'ajouter en cmakedebug ou juste normalement
+#include "matrice.h"
 
 double** creatematricezero(int n) {
     double** M = (double**)malloc(n * sizeof(double*));
@@ -23,22 +23,44 @@ double** creatematricezero(int n) {
 }
 double** createtransitionmatrice(t_list_adjacente* adj) {
     int n = adj->taille;
-//création d'un matrice n x n remplie de zeros
     double** M = creatematricezero(n);
     if (M == NULL) {
-        printf("Erreur\n");
-        return NULL;}
-//pour chaque sommet i
+        printf("Erreur allocation matrice\n");
+        return NULL;
+    }
+
+    // Remplissage temporaire des poids (non normalisés)
     for (int i = 0; i < n; i++) {
-       t_cell* current = adj->tab[i].head; // pointeur temporaire vers la tête de la liste
-        while (current != NULL) {// Parcourir la liste des voisins
-            int j = current->sommet_arrive - 1; // numéro du voisin
-            double p = current->proba; // probabilité de la transition de i à j
-            M[i][j] = p; // on rempli la matrice
+        t_cell* current = adj->tab[i].head;
+        while (current != NULL) {
+            int j = current->sommet_arrive - 1;
+            double w = current->proba; // si ce sont des poids
+            if (j >= 0 && j < n) {
+                M[i][j] = w;
+            } else {
+                printf("Warning: indice hors-limite i=%d j=%d\n", i, j);
+            }
             current = current->next;
         }
     }
-return M;
+
+    // Normalisation ligne par ligne (sorties de i)
+    for (int i = 0; i < n; i++) {
+        double sum = 0.0;
+        for (int j = 0; j < n; j++) sum += M[i][j];
+
+        if (sum > 0.0) {
+            for (int j = 0; j < n; j++) M[i][j] /= sum;
+        } else {
+            // Pas de sortie: rendre le noeud absorbant (ou distribuer uniformément)
+            // Option A: auto-boucle
+            M[i][i] = 1.0;
+            // Option B (alternative): distribuer uniformément
+            // for (int j = 0; j < n; j++) M[i][j] = 1.0 / n;
+        }
+    }
+
+    return M;
 }
 
 void copymatrice(double** A, double** B, int n){

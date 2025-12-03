@@ -1,5 +1,5 @@
 CMakeFiles/untitled10.dir/stack.c.obj: \
- C:\Users\alice\CLionProjects\Projet_Etude_Graphes_Markov\cmake-build-debug\stack.c \
+ C:\Users\alice\CLionProjects\Projet_Etude_Graphes_Markov\stack.c \
  C:/Program\ Files/JetBrains/CLion\ 2025.2/bin/mingw/x86_64-w64-mingw32/include/stdio.h \
  C:/Program\ Files/JetBrains/CLion\ 2025.2/bin/mingw/x86_64-w64-mingw32/include/corecrt_stdio_config.h \
  C:/Program\ Files/JetBrains/CLion\ 2025.2/bin/mingw/x86_64-w64-mingw32/include/corecrt.h \
@@ -21,8 +21,8 @@ CMakeFiles/untitled10.dir/stack.c.obj: \
  C:/Program\ Files/JetBrains/CLion\ 2025.2/bin/mingw/x86_64-w64-mingw32/include/malloc.h \
  C:/Program\ Files/JetBrains/CLion\ 2025.2/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/mm_malloc.h \
  C:/Program\ Files/JetBrains/CLion\ 2025.2/bin/mingw/x86_64-w64-mingw32/include/errno.h \
- C:\Users\alice\CLionProjects\Projet_Etude_Graphes_Markov\cmake-build-debug\tarjan.h \
+ C:\Users\alice\CLionProjects\Projet_Etude_Graphes_Markov\tarjan.h \
  C:/Program\ Files/JetBrains/CLion\ 2025.2/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/stdbool.h \
  C:/Program\ Files/JetBrains/CLion\ 2025.2/bin/mingw/x86_64-w64-mingw32/include/string.h \
  C:/Program\ Files/JetBrains/CLion\ 2025.2/bin/mingw/x86_64-w64-mingw32/include/sec_api/string_s.h \
- C:\Users\alice\CLionProjects\Projet_Etude_Graphes_Markov\cmake-build-debug\stack.h
+ C:\Users\alice\CLionProjects\Projet_Etude_Graphes_Markov\stack.h

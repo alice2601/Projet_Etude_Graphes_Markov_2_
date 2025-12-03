@@ -86,116 +86,116 @@ CMakeFiles/untitled10.dir/main.c.s: cmake_force
 	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Users\alice\CLionProjects\Projet_Etude_Graphes_Markov\main.c -o CMakeFiles\untitled10.dir\main.c.s
 
 CMakeFiles/untitled10.dir/fonction.c.obj: CMakeFiles/untitled10.dir/flags.make
-CMakeFiles/untitled10.dir/fonction.c.obj: fonction.c
+CMakeFiles/untitled10.dir/fonction.c.obj: C:/Users/alice/CLionProjects/Projet_Etude_Graphes_Markov/fonction.c
 CMakeFiles/untitled10.dir/fonction.c.obj: CMakeFiles/untitled10.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\alice\CLionProjects\Projet_Etude_Graphes_Markov\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/untitled10.dir/fonction.c.obj"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/untitled10.dir/fonction.c.obj -MF CMakeFiles\untitled10.dir\fonction.c.obj.d -o CMakeFiles\untitled10.dir\fonction.c.obj -c C:\Users\alice\CLionProjects\Projet_Etude_Graphes_Markov\cmake-build-debug\fonction.c
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/untitled10.dir/fonction.c.obj -MF CMakeFiles\untitled10.dir\fonction.c.obj.d -o CMakeFiles\untitled10.dir\fonction.c.obj -c C:\Users\alice\CLionProjects\Projet_Etude_Graphes_Markov\fonction.c
 
 CMakeFiles/untitled10.dir/fonction.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/untitled10.dir/fonction.c.i"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Users\alice\CLionProjects\Projet_Etude_Graphes_Markov\cmake-build-debug\fonction.c > CMakeFiles\untitled10.dir\fonction.c.i
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Users\alice\CLionProjects\Projet_Etude_Graphes_Markov\fonction.c > CMakeFiles\untitled10.dir\fonction.c.i
 
 CMakeFiles/untitled10.dir/fonction.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/untitled10.dir/fonction.c.s"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Users\alice\CLionProjects\Projet_Etude_Graphes_Markov\cmake-build-debug\fonction.c -o CMakeFiles\untitled10.dir\fonction.c.s
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Users\alice\CLionProjects\Projet_Etude_Graphes_Markov\fonction.c -o CMakeFiles\untitled10.dir\fonction.c.s
 
 CMakeFiles/untitled10.dir/utils.c.obj: CMakeFiles/untitled10.dir/flags.make
-CMakeFiles/untitled10.dir/utils.c.obj: utils.c
+CMakeFiles/untitled10.dir/utils.c.obj: C:/Users/alice/CLionProjects/Projet_Etude_Graphes_Markov/utils.c
 CMakeFiles/untitled10.dir/utils.c.obj: CMakeFiles/untitled10.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\alice\CLionProjects\Projet_Etude_Graphes_Markov\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/untitled10.dir/utils.c.obj"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/untitled10.dir/utils.c.obj -MF CMakeFiles\untitled10.dir\utils.c.obj.d -o CMakeFiles\untitled10.dir\utils.c.obj -c C:\Users\alice\CLionProjects\Projet_Etude_Graphes_Markov\cmake-build-debug\utils.c
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/untitled10.dir/utils.c.obj -MF CMakeFiles\untitled10.dir\utils.c.obj.d -o CMakeFiles\untitled10.dir\utils.c.obj -c C:\Users\alice\CLionProjects\Projet_Etude_Graphes_Markov\utils.c
 
 CMakeFiles/untitled10.dir/utils.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/untitled10.dir/utils.c.i"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Users\alice\CLionProjects\Projet_Etude_Graphes_Markov\cmake-build-debug\utils.c > CMakeFiles\untitled10.dir\utils.c.i
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Users\alice\CLionProjects\Projet_Etude_Graphes_Markov\utils.c > CMakeFiles\untitled10.dir\utils.c.i
 
 CMakeFiles/untitled10.dir/utils.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/untitled10.dir/utils.c.s"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Users\alice\CLionProjects\Projet_Etude_Graphes_Markov\cmake-build-debug\utils.c -o CMakeFiles\untitled10.dir\utils.c.s
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Users\alice\CLionProjects\Projet_Etude_Graphes_Markov\utils.c -o CMakeFiles\untitled10.dir\utils.c.s
 
 CMakeFiles/untitled10.dir/hasse.c.obj: CMakeFiles/untitled10.dir/flags.make
-CMakeFiles/untitled10.dir/hasse.c.obj: hasse.c
+CMakeFiles/untitled10.dir/hasse.c.obj: C:/Users/alice/CLionProjects/Projet_Etude_Graphes_Markov/hasse.c
 CMakeFiles/untitled10.dir/hasse.c.obj: CMakeFiles/untitled10.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\alice\CLionProjects\Projet_Etude_Graphes_Markov\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object CMakeFiles/untitled10.dir/hasse.c.obj"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/untitled10.dir/hasse.c.obj -MF CMakeFiles\untitled10.dir\hasse.c.obj.d -o CMakeFiles\untitled10.dir\hasse.c.obj -c C:\Users\alice\CLionProjects\Projet_Etude_Graphes_Markov\cmake-build-debug\hasse.c
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/untitled10.dir/hasse.c.obj -MF CMakeFiles\untitled10.dir\hasse.c.obj.d -o CMakeFiles\untitled10.dir\hasse.c.obj -c C:\Users\alice\CLionProjects\Projet_Etude_Graphes_Markov\hasse.c
 
 CMakeFiles/untitled10.dir/hasse.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/untitled10.dir/hasse.c.i"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Users\alice\CLionProjects\Projet_Etude_Graphes_Markov\cmake-build-debug\hasse.c > CMakeFiles\untitled10.dir\hasse.c.i
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Users\alice\CLionProjects\Projet_Etude_Graphes_Markov\hasse.c > CMakeFiles\untitled10.dir\hasse.c.i
 
 CMakeFiles/untitled10.dir/hasse.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/untitled10.dir/hasse.c.s"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Users\alice\CLionProjects\Projet_Etude_Graphes_Markov\cmake-build-debug\hasse.c -o CMakeFiles\untitled10.dir\hasse.c.s
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Users\alice\CLionProjects\Projet_Etude_Graphes_Markov\hasse.c -o CMakeFiles\untitled10.dir\hasse.c.s
 
 CMakeFiles/untitled10.dir/stack.c.obj: CMakeFiles/untitled10.dir/flags.make
-CMakeFiles/untitled10.dir/stack.c.obj: stack.c
+CMakeFiles/untitled10.dir/stack.c.obj: C:/Users/alice/CLionProjects/Projet_Etude_Graphes_Markov/stack.c
 CMakeFiles/untitled10.dir/stack.c.obj: CMakeFiles/untitled10.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\alice\CLionProjects\Projet_Etude_Graphes_Markov\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building C object CMakeFiles/untitled10.dir/stack.c.obj"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/untitled10.dir/stack.c.obj -MF CMakeFiles\untitled10.dir\stack.c.obj.d -o CMakeFiles\untitled10.dir\stack.c.obj -c C:\Users\alice\CLionProjects\Projet_Etude_Graphes_Markov\cmake-build-debug\stack.c
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/untitled10.dir/stack.c.obj -MF CMakeFiles\untitled10.dir\stack.c.obj.d -o CMakeFiles\untitled10.dir\stack.c.obj -c C:\Users\alice\CLionProjects\Projet_Etude_Graphes_Markov\stack.c
 
 CMakeFiles/untitled10.dir/stack.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/untitled10.dir/stack.c.i"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Users\alice\CLionProjects\Projet_Etude_Graphes_Markov\cmake-build-debug\stack.c > CMakeFiles\untitled10.dir\stack.c.i
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Users\alice\CLionProjects\Projet_Etude_Graphes_Markov\stack.c > CMakeFiles\untitled10.dir\stack.c.i
 
 CMakeFiles/untitled10.dir/stack.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/untitled10.dir/stack.c.s"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Users\alice\CLionProjects\Projet_Etude_Graphes_Markov\cmake-build-debug\stack.c -o CMakeFiles\untitled10.dir\stack.c.s
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Users\alice\CLionProjects\Projet_Etude_Graphes_Markov\stack.c -o CMakeFiles\untitled10.dir\stack.c.s
 
 CMakeFiles/untitled10.dir/tarjan.c.obj: CMakeFiles/untitled10.dir/flags.make
-CMakeFiles/untitled10.dir/tarjan.c.obj: tarjan.c
+CMakeFiles/untitled10.dir/tarjan.c.obj: C:/Users/alice/CLionProjects/Projet_Etude_Graphes_Markov/tarjan.c
 CMakeFiles/untitled10.dir/tarjan.c.obj: CMakeFiles/untitled10.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\alice\CLionProjects\Projet_Etude_Graphes_Markov\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building C object CMakeFiles/untitled10.dir/tarjan.c.obj"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/untitled10.dir/tarjan.c.obj -MF CMakeFiles\untitled10.dir\tarjan.c.obj.d -o CMakeFiles\untitled10.dir\tarjan.c.obj -c C:\Users\alice\CLionProjects\Projet_Etude_Graphes_Markov\cmake-build-debug\tarjan.c
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/untitled10.dir/tarjan.c.obj -MF CMakeFiles\untitled10.dir\tarjan.c.obj.d -o CMakeFiles\untitled10.dir\tarjan.c.obj -c C:\Users\alice\CLionProjects\Projet_Etude_Graphes_Markov\tarjan.c
 
 CMakeFiles/untitled10.dir/tarjan.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/untitled10.dir/tarjan.c.i"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Users\alice\CLionProjects\Projet_Etude_Graphes_Markov\cmake-build-debug\tarjan.c > CMakeFiles\untitled10.dir\tarjan.c.i
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Users\alice\CLionProjects\Projet_Etude_Graphes_Markov\tarjan.c > CMakeFiles\untitled10.dir\tarjan.c.i
 
 CMakeFiles/untitled10.dir/tarjan.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/untitled10.dir/tarjan.c.s"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Users\alice\CLionProjects\Projet_Etude_Graphes_Markov\cmake-build-debug\tarjan.c -o CMakeFiles\untitled10.dir\tarjan.c.s
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Users\alice\CLionProjects\Projet_Etude_Graphes_Markov\tarjan.c -o CMakeFiles\untitled10.dir\tarjan.c.s
 
 CMakeFiles/untitled10.dir/mermaid_partie2.c.obj: CMakeFiles/untitled10.dir/flags.make
-CMakeFiles/untitled10.dir/mermaid_partie2.c.obj: mermaid_partie2.c
+CMakeFiles/untitled10.dir/mermaid_partie2.c.obj: C:/Users/alice/CLionProjects/Projet_Etude_Graphes_Markov/mermaid_partie2.c
 CMakeFiles/untitled10.dir/mermaid_partie2.c.obj: CMakeFiles/untitled10.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\alice\CLionProjects\Projet_Etude_Graphes_Markov\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building C object CMakeFiles/untitled10.dir/mermaid_partie2.c.obj"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/untitled10.dir/mermaid_partie2.c.obj -MF CMakeFiles\untitled10.dir\mermaid_partie2.c.obj.d -o CMakeFiles\untitled10.dir\mermaid_partie2.c.obj -c C:\Users\alice\CLionProjects\Projet_Etude_Graphes_Markov\cmake-build-debug\mermaid_partie2.c
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/untitled10.dir/mermaid_partie2.c.obj -MF CMakeFiles\untitled10.dir\mermaid_partie2.c.obj.d -o CMakeFiles\untitled10.dir\mermaid_partie2.c.obj -c C:\Users\alice\CLionProjects\Projet_Etude_Graphes_Markov\mermaid_partie2.c
 
 CMakeFiles/untitled10.dir/mermaid_partie2.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/untitled10.dir/mermaid_partie2.c.i"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Users\alice\CLionProjects\Projet_Etude_Graphes_Markov\cmake-build-debug\mermaid_partie2.c > CMakeFiles\untitled10.dir\mermaid_partie2.c.i
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Users\alice\CLionProjects\Projet_Etude_Graphes_Markov\mermaid_partie2.c > CMakeFiles\untitled10.dir\mermaid_partie2.c.i
 
 CMakeFiles/untitled10.dir/mermaid_partie2.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/untitled10.dir/mermaid_partie2.c.s"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Users\alice\CLionProjects\Projet_Etude_Graphes_Markov\cmake-build-debug\mermaid_partie2.c -o CMakeFiles\untitled10.dir\mermaid_partie2.c.s
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Users\alice\CLionProjects\Projet_Etude_Graphes_Markov\mermaid_partie2.c -o CMakeFiles\untitled10.dir\mermaid_partie2.c.s
 
 CMakeFiles/untitled10.dir/matrice.c.obj: CMakeFiles/untitled10.dir/flags.make
-CMakeFiles/untitled10.dir/matrice.c.obj: matrice.c
+CMakeFiles/untitled10.dir/matrice.c.obj: C:/Users/alice/CLionProjects/Projet_Etude_Graphes_Markov/matrice.c
 CMakeFiles/untitled10.dir/matrice.c.obj: CMakeFiles/untitled10.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\alice\CLionProjects\Projet_Etude_Graphes_Markov\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building C object CMakeFiles/untitled10.dir/matrice.c.obj"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/untitled10.dir/matrice.c.obj -MF CMakeFiles\untitled10.dir\matrice.c.obj.d -o CMakeFiles\untitled10.dir\matrice.c.obj -c C:\Users\alice\CLionProjects\Projet_Etude_Graphes_Markov\cmake-build-debug\matrice.c
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/untitled10.dir/matrice.c.obj -MF CMakeFiles\untitled10.dir\matrice.c.obj.d -o CMakeFiles\untitled10.dir\matrice.c.obj -c C:\Users\alice\CLionProjects\Projet_Etude_Graphes_Markov\matrice.c
 
 CMakeFiles/untitled10.dir/matrice.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/untitled10.dir/matrice.c.i"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Users\alice\CLionProjects\Projet_Etude_Graphes_Markov\cmake-build-debug\matrice.c > CMakeFiles\untitled10.dir\matrice.c.i
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Users\alice\CLionProjects\Projet_Etude_Graphes_Markov\matrice.c > CMakeFiles\untitled10.dir\matrice.c.i
 
 CMakeFiles/untitled10.dir/matrice.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/untitled10.dir/matrice.c.s"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Users\alice\CLionProjects\Projet_Etude_Graphes_Markov\cmake-build-debug\matrice.c -o CMakeFiles\untitled10.dir\matrice.c.s
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Users\alice\CLionProjects\Projet_Etude_Graphes_Markov\matrice.c -o CMakeFiles\untitled10.dir\matrice.c.s
 
 CMakeFiles/untitled10.dir/proba.c.obj: CMakeFiles/untitled10.dir/flags.make
-CMakeFiles/untitled10.dir/proba.c.obj: proba.c
+CMakeFiles/untitled10.dir/proba.c.obj: C:/Users/alice/CLionProjects/Projet_Etude_Graphes_Markov/proba.c
 CMakeFiles/untitled10.dir/proba.c.obj: CMakeFiles/untitled10.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\alice\CLionProjects\Projet_Etude_Graphes_Markov\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building C object CMakeFiles/untitled10.dir/proba.c.obj"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/untitled10.dir/proba.c.obj -MF CMakeFiles\untitled10.dir\proba.c.obj.d -o CMakeFiles\untitled10.dir\proba.c.obj -c C:\Users\alice\CLionProjects\Projet_Etude_Graphes_Markov\cmake-build-debug\proba.c
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/untitled10.dir/proba.c.obj -MF CMakeFiles\untitled10.dir\proba.c.obj.d -o CMakeFiles\untitled10.dir\proba.c.obj -c C:\Users\alice\CLionProjects\Projet_Etude_Graphes_Markov\proba.c
 
 CMakeFiles/untitled10.dir/proba.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/untitled10.dir/proba.c.i"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Users\alice\CLionProjects\Projet_Etude_Graphes_Markov\cmake-build-debug\proba.c > CMakeFiles\untitled10.dir\proba.c.i
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Users\alice\CLionProjects\Projet_Etude_Graphes_Markov\proba.c > CMakeFiles\untitled10.dir\proba.c.i
 
 CMakeFiles/untitled10.dir/proba.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/untitled10.dir/proba.c.s"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Users\alice\CLionProjects\Projet_Etude_Graphes_Markov\cmake-build-debug\proba.c -o CMakeFiles\untitled10.dir\proba.c.s
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Users\alice\CLionProjects\Projet_Etude_Graphes_Markov\proba.c -o CMakeFiles\untitled10.dir\proba.c.s
 
 # Object files for target untitled10
 untitled10_OBJECTS = \

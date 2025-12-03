@@ -1,6 +1,6 @@
-#include "cmake-build-debug/tarjan.h"
-#include "cmake-build-debug/mermaid_partie2.h"
-#include "cmake-build-debug/hasse.h"
+#include "tarjan.h"
+#include "mermaid_partie2.h"
+#include "hasse.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -8,10 +8,10 @@
 #include <math.h>
 
 
-#include "cmake-build-debug/fonction.h"
-#include "cmake-build-debug/stack.h"
-#include "cmake-build-debug/matrice.h"
-#include "cmake-build-debug/proba.h"
+#include "fonction.h"
+#include "stack.h"
+#include "matrice.h"
+
 
 
 
@@ -347,6 +347,7 @@ int main() {
         printf("Erreur lecture graphe\n");
         return 1;
     }
+
     int n = adj->taille; // nombre de sommets
 // Explication : readGraph retourne une t_list_adjacente* qui contient le grpahe lu depuis le fichier
                 // Et adj-> taille donne le nombre de sommets
@@ -450,13 +451,7 @@ int main() {
     // Si convergé, on affiche la distribution limite
 
 
-    // 6) Libération mémoire
 
-    free(dist);
-    free(dist_limite);
-    for (int i = 0; i < n; i++) free(M[i]);
-    free(M);
-    // POurquoi ? Car important pour éviter les fuites mémoire avec tts les allocation malloc
 
 
     // Question 1b :
@@ -494,7 +489,7 @@ int main() {
             for (int i = 0; i < n; i++) {
                 next[i] = 0.0;
                 for (int j = 0; j < n; j++) {
-                    next[i] += dist_n[j] * M[j][i];
+                    next[i] += dist_n[j] * M[i][j];
                 }
             }
             free(dist_n);
@@ -508,5 +503,218 @@ int main() {
 
     }
 
-    return 0;
+    // 6) Libération mémoire
+
+    free(dist);
+    free(dist_limite);
+
+    // POurquoi ? Car important pour éviter les fuites mémoire avec tts les allocation malloc
+
+
+    // Q 2:
+
+
+
+printf("\n\nQUESTION 2 \n");
+
+// 1) Initialisation du vecteur uniformément réparti
+double* dist_q2 = (double*)malloc(n * sizeof(double));
+if (dist_q2 == NULL) {
+    printf("Erreur allocation mémoire dist_q2\n");
+    // Libérer la mémoire déjà allouée avant de quitter à chque fois
+    for (int i = 0; i < n; i++) free(M[i]);
+    free(M);
+    return 1;
+}
+
+for (int i = 0; i < n; i++) dist_q2[i] = 0.0;
+
+// États 2, 5, 12, 21, 25 → indices 1, 4, 11, 20, 24
+dist_q2[1] = 0.2;   // État 2
+dist_q2[4] = 0.2;   // État 5
+dist_q2[11] = 0.2;  // État 12
+dist_q2[20] = 0.2;  // État 21
+dist_q2[24] = 0.2;  // État 25
+
+printf("Distribution initiale (uniforme sur 2, 5, 12, 21, 25) :\n");
+for (int i = 0; i < n; i++) {
+    if (dist_q2[i] > 0) printf("  État %d : %.5f\n", i+1, dist_q2[i]);
+}
+
+// 2) Calcul des distributions après n pas
+int pas_q2[] = {1, 2, 10, 50};
+for (int k = 0; k < 4; k++) {
+    double* dist_n = (double*)malloc(n * sizeof(double));
+    if (dist_n == NULL) {
+        printf("Erreur allocation dist_n\n");
+        free(dist_q2);
+        for (int i = 0; i < n; i++) free(M[i]);
+        free(M);
+        return 1;
+    }
+
+    for (int i = 0; i < n; i++) dist_n[i] = dist_q2[i];
+
+    for (int step = 0; step < pas_q2[k]; step++) {
+        double* next = (double*)malloc(n * sizeof(double));
+        if (next == NULL) {
+            printf("Erreur allocation next\n");
+            free(dist_n);
+            free(dist_q2);
+            for (int i = 0; i < n; i++) free(M[i]);
+            free(M);
+            return 1;
+        }
+
+        for (int i = 0; i < n; i++) {
+            next[i] = 0.0;
+            for (int j = 0; j < n; j++) {
+                next[i] += dist_n[j] * M[i][j];
+            }
+        }
+        free(dist_n);
+        dist_n = next;
+    }
+
+    printf("\nDistribution après n = %d pas :\n", pas_q2[k]);
+    for (int i = 0; i < n; i++) {
+        if (dist_n[i] > 0.0001)
+            printf("  État %d : %.5f\n", i+1, dist_n[i]);
+    }
+    free(dist_n);
+}
+
+// 3) Vérification distribution limite
+double* dist_limite_q2 = (double*)malloc(n * sizeof(double));
+if (dist_limite_q2 == NULL) {
+    printf("Erreur allocation dist_limite_q2\n");
+    free(dist_q2);
+    for (int i = 0; i < n; i++) free(M[i]);
+    free(M);
+    return 1;
+}
+
+for (int i = 0; i < n; i++) dist_limite_q2[i] = dist_q2[i];
+
+int convergent_q2 = 0;
+for (int step = 1; step <= 1000; step++) {
+    double* next = (double*)malloc(n * sizeof(double));
+    if (next == NULL) {
+        printf("Erreur allocation next dans convergence\n");
+        free(dist_limite_q2);
+        free(dist_q2);
+        for (int i = 0; i < n; i++) free(M[i]);
+        free(M);
+        return 1;
+    }
+
+    for (int i = 0; i < n; i++) {
+        next[i] = 0.0;
+        for (int j = 0; j < n; j++) {
+            next[i] += dist_limite_q2[j] * M[i][j];
+        }
+    }
+
+    double diff = 0.0;
+    for (int i = 0; i < n; i++) {
+        diff += fabs(next[i] - dist_limite_q2[i]);
+        dist_limite_q2[i] = next[i];
+    }
+    free(next);
+
+    if (diff < 1e-6) {
+        convergent_q2 = 1;
+        printf("\nConvergence atteinte après %d itérations\n", step);
+        break;
+    }
+}
+
+if (convergent_q2) {
+    printf("\n✓ Distribution limite existe (Question 2) :\n");
+    for (int i = 0; i < n; i++) {
+        if (dist_limite_q2[i] > 0.0001)
+            printf("  État %d : %.5f\n", i+1, dist_limite_q2[i]);
+    }
+} else {
+    printf("\n✗ Pas de distribution limite détectée (Question 2)\n");
+}
+
+// Libération mémoire Question 2
+free(dist_q2);
+free(dist_limite_q2);
+
+    // Q3:
+
+    printf("\n\nQUESTION 3\n");
+
+    // Tester plusieurs combinaisons de (a, b, c, d, e) -- proba différentes
+    double parametres[][5] = {
+        {0.5, 0.2, 0.1, 0.1, 0.1},  // Test 1
+        {0.1, 0.1, 0.6, 0.1, 0.1},  // Test 2
+        {0.3, 0.3, 0.1, 0.2, 0.1},  // Test 3
+        {0.0, 0.0, 0.0, 0.5, 0.5},  // Test 4
+    };
+
+    int nb_tests = 4;
+
+    for (int test = 0; test < nb_tests; test++) {
+        double a = parametres[test][0];
+        double b = parametres[test][1];
+        double c = parametres[test][2];
+        double d = parametres[test][3];
+        double e = parametres[test][4];
+
+        printf("\n Test %d : a=%.2f, b=%.2f, c=%.2f, d=%.2f, e=%.2f \n",
+               test+1, a, b, c, d, e);
+
+        // Initialisation
+        double* dist_q3 = (double*)malloc(n * sizeof(double));
+        for (int i = 0; i < n; i++) dist_q3[i] = 0.0;
+        dist_q3[1] = a;   // État 2
+        dist_q3[4] = b;   // État 5
+        dist_q3[11] = c;  // État 12
+        dist_q3[20] = d;  // État 21
+        dist_q3[24] = e;  // État 25
+
+        // Calcul distribution limite
+        double* dist_limite_q3 = (double*)malloc(n * sizeof(double));
+        for (int i = 0; i < n; i++) dist_limite_q3[i] = dist_q3[i];
+
+        for (int step = 1; step <= 1000; step++) {
+            double* next = (double*)malloc(n * sizeof(double));
+            for (int i = 0; i < n; i++) {
+                next[i] = 0.0;
+                for (int j = 0; j < n; j++) {
+                    next[i] += dist_limite_q3[j] * M[i][j];
+                }
+            }
+
+            double diff = 0.0;
+            for (int i = 0; i < n; i++) {
+                diff += fabs(next[i] - dist_limite_q3[i]);
+                dist_limite_q3[i] = next[i];
+            }
+            free(next);
+
+            if (diff < 1e-6) break;
+        }
+
+        printf("Distribution limite :\n");
+        for (int i = 0; i < n; i++) {
+            if (dist_limite_q3[i] > 0.0001)
+                printf("État %d : %.5f\n", i+1, dist_limite_q3[i]);
+        }
+
+        free(dist_q3);
+        free(dist_limite_q3);
+    }
+
+
+// Libération de la matrice M et du graphe (UNE SEULE FOIS à la toute fin) donc si rajout de code utilisant matrice M (mettre avant ces deux lignes)
+
+for (int i = 0; i < n; i++) free(M[i]);
+free(M);
+
+
+return 0;
 }

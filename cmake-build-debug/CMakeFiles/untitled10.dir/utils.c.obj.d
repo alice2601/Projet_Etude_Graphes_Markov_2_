@@ -1,5 +1,5 @@
 CMakeFiles/untitled10.dir/utils.c.obj: \
- C:\Users\alice\CLionProjects\Projet_Etude_Graphes_Markov\cmake-build-debug\utils.c \
+ C:\Users\alice\CLionProjects\Projet_Etude_Graphes_Markov\utils.c \
  C:/Program\ Files/JetBrains/CLion\ 2025.2/bin/mingw/x86_64-w64-mingw32/include/stdio.h \
  C:/Program\ Files/JetBrains/CLion\ 2025.2/bin/mingw/x86_64-w64-mingw32/include/corecrt_stdio_config.h \
  C:/Program\ Files/JetBrains/CLion\ 2025.2/bin/mingw/x86_64-w64-mingw32/include/corecrt.h \
@@ -23,4 +23,4 @@ CMakeFiles/untitled10.dir/utils.c.obj: \
  C:/Program\ Files/JetBrains/CLion\ 2025.2/bin/mingw/x86_64-w64-mingw32/include/errno.h \
  C:/Program\ Files/JetBrains/CLion\ 2025.2/bin/mingw/x86_64-w64-mingw32/include/string.h \
  C:/Program\ Files/JetBrains/CLion\ 2025.2/bin/mingw/x86_64-w64-mingw32/include/sec_api/string_s.h \
- C:\Users\alice\CLionProjects\Projet_Etude_Graphes_Markov\cmake-build-debug\utils.h
+ C:\Users\alice\CLionProjects\Projet_Etude_Graphes_Markov\utils.h
