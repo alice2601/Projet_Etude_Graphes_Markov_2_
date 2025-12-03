@@ -27,6 +27,10 @@ double diffmatrice(double** M, double** N, int n);
 // affichage
 void printmatrice(double** M, int n);
 
+void distrib_limite(double* dist, double** M, int n);
+
+void question4(double** M, int n);
+
 
 
 

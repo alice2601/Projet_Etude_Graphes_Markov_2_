@@ -32,6 +32,4 @@ CMakeFiles/untitled10.dir/main.c.obj: \
  C:/Program\ Files/JetBrains/CLion\ 2025.2/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/tgmath.h \
  C:/Program\ Files/JetBrains/CLion\ 2025.2/bin/mingw/x86_64-w64-mingw32/include/math.h \
  C:/Program\ Files/JetBrains/CLion\ 2025.2/bin/mingw/x86_64-w64-mingw32/include/complex.h \
- C:\Users\alice\CLionProjects\Projet_Etude_Graphes_Markov\matrice.h \
- C:/Program\ Files/JetBrains/CLion\ 2025.2/bin/mingw/x86_64-w64-mingw32/include/direct.h \
- C:/Program\ Files/JetBrains/CLion\ 2025.2/bin/mingw/x86_64-w64-mingw32/include/io.h
+ C:\Users\alice\CLionProjects\Projet_Etude_Graphes_Markov\matrice.h
