@@ -708,122 +708,186 @@ free(dist_limite_q2);
         free(dist_q3);
         free(dist_limite_q3);
     }
- // question 4
+// ================================
+// QUESTION 4
+// ================================
 
-    printf("\n\nQUESTION 4\n");
+printf("\n\nQUESTION 4\n");
 
-    double* dist_q4 = (double*)malloc(n * sizeof(double));
-    double* dist_limite_q4 = (double*)malloc(n * sizeof(double));
+double* dist_q4 = malloc(n * sizeof(double));
+double* dist_limite_q4 = malloc(n * sizeof(double));
 
-    for (int cas = 0; cas < 3; cas++) {
-        // Initialisation
-        for (int i = 0; i < n; i++) dist_q4[i] = 0.0;
+int pas_Q4[] = {1, 2, 10, 50};
 
-        if (cas == 0) {
-            printf("\nCas 1 : État initial = 8\n");
-            dist_q4[7] = 1.0; // État 8
-        } else if (cas == 1) {
-            printf("\nCas 2 : Uniformément réparti entre états 8, 9, 16\n");
-            dist_q4[7] = 1.0/3; // État 8
-            dist_q4[8] = 1.0/3; // État 9
-            dist_q4[15] = 1.0/3; // État 16
-        } else {
-            printf("\nCas 3 : Répartition aléatoire entre états 8, 9, 16\n");
-            double r1 = rand() / (double)RAND_MAX;
-            double r2 = rand() / (double)RAND_MAX;
-            double r3 = rand() / (double)RAND_MAX;
-            double somme = r1 + r2 + r3;
-            dist_q4[7] = r1 / somme;
-            dist_q4[8] = r2 / somme;
-            dist_q4[15] = r3 / somme;
-        }
+for (int cas = 0; cas < 3; cas++) {
 
-        // Copie de l'initialisation pour l'itération
-        for (int i = 0; i < n; i++) dist_limite_q4[i] = dist_q4[i];
+    // -------- INITIALISATION -----------------
+    for (int i = 0; i < n; i++) dist_q4[i] = 0.0;
 
-        // Calcul distribution limite
-        for (int step = 1; step <= 1000; step++) {
-            double* next = (double*)malloc(n * sizeof(double));
-            for (int i = 0; i < n; i++) {
-                next[i] = 0.0;
-                for (int j = 0; j < n; j++) {
-                    next[i] += dist_limite_q4[j] * M[i][j];
+    if (cas == 0) {
+        printf("\nCas 1 : état initial = 8\n");
+        dist_q4[7] = 1.0;
+    }
+    else if (cas == 1) {
+        printf("\nCas 2 : uniforme sur 8, 9, 16\n");
+        dist_q4[7]  = 1.0/3;
+        dist_q4[8]  = 1.0/3;
+        dist_q4[15] = 1.0/3;
+    }
+    else {
+        printf("\nCas 3 : répartition aléatoire sur 8, 9, 16\n");
+        double r1 = rand()/(double)RAND_MAX;
+        double r2 = rand()/(double)RAND_MAX;
+        double r3 = rand()/(double)RAND_MAX;
+        double somme = r1 + r2 + r3;
+        dist_q4[7]  = r1/somme;
+        dist_q4[8]  = r2/somme;
+        dist_q4[15] = r3/somme;
+    }
+
+    // --------- DISTRIBUTIONS APRÈS n PAS -----------------
+    for (int k = 0; k < 4; k++) {
+
+        int npas = pas_Q4[k];
+
+        double* dist_n = malloc(n * sizeof(double));
+        for (int i = 0; i < n; i++) dist_n[i] = dist_q4[i];
+
+        for (int step = 0; step < npas; step++) {
+
+            double* next = malloc(n * sizeof(double));
+
+            // next[j] = somme_i dist[i] * M[i][j]
+            for (int j = 0; j < n; j++) {
+                next[j] = 0.0;
+                for (int i = 0; i < n; i++) {
+                    next[j] += dist_n[i] * M[i][j];
                 }
             }
 
-            double diff = 0.0;
-            for (int i = 0; i < n; i++) {
-                diff += fabs(next[i] - dist_limite_q4[i]);
-                dist_limite_q4[i] = next[i];
-            }
-            free(next);
-
-            if (diff < 1e-6) break;
+            free(dist_n);
+            dist_n = next;
         }
 
-        printf("Distribution limite :\n");
-        for (int i = 0; i < n; i++) {
-            if (dist_limite_q4[i] > 0.0001)
-                printf("État %d : %.5f\n", i+1, dist_limite_q4[i]);
-        }
+        printf("\nDistribution après n = %d pas :\n", npas);
+        for (int i = 0; i < n; i++)
+            if (dist_n[i] > 0.0001)
+                printf("État %d : %.5f\n", i+1, dist_n[i]);
+
+        free(dist_n);
     }
 
-    free(dist_q4);
-    free(dist_limite_q4);
+    // --------- DISTRIBUTION LIMITE -----------------
+    for (int i = 0; i < n; i++) dist_limite_q4[i] = dist_q4[i];
 
-    //question 5
+    for (int iter = 1; iter <= 1000; iter++) {
+
+        double* next = malloc(n * sizeof(double));
+
+        for (int j = 0; j < n; j++) {
+            next[j] = 0.0;
+            for (int i = 0; i < n; i++)
+                next[j] += dist_limite_q4[i] * M[i][j];
+        }
+
+        double diff = 0.0;
+        for (int i = 0; i < n; i++) {
+            diff += fabs(next[i] - dist_limite_q4[i]);
+            dist_limite_q4[i] = next[i];
+        }
+
+        free(next);
+        if (diff < 1e-6) break;
+    }
+
+    printf("\nDistribution limite du cas %d :\n", cas+1);
+    for (int i = 0; i < n; i++)
+        if (dist_limite_q4[i] > 0.0001)
+            printf("État %d : %.5f\n", i+1, dist_limite_q4[i]);
+}
+
+free(dist_q4);
+free(dist_limite_q4);
+
+// ================================
+// QUESTION 5
+// ================================
 
 printf("\n\nQUESTION 5\n");
 
-// Normaliser la matrice M pour que chaque colonne somme à 1
-for (int j = 0; j < n; j++) {
-    double somme = 0.0;
-    for (int i = 0; i < n; i++) somme += M[i][j];
-    if (somme > 0.0) {
-        for (int i = 0; i < n; i++) M[i][j] /= somme;
-    }
-}
+int etats_q5[] = {9, 13, 18, 21, 23};
+int nb_etats_q5 = 5;
 
-double* dist_q5 = (double*)malloc(n * sizeof(double));
-double* dist_limite_q5 = (double*)malloc(n * sizeof(double));
+double* dist_q5 = malloc(n * sizeof(double));
+double* dist_limite_q5 = malloc(n * sizeof(double));
 
-int etats[] = {9, 13, 18, 21, 23}; // indices C pour états 10, 14, 19, 22, 24
-int nb_etats = 5;
+int pas_Q5[] = {1, 2, 10, 50};
 
 for (int cas = 0; cas < 3; cas++) {
-    // Initialisation
+
     for (int i = 0; i < n; i++) dist_q5[i] = 0.0;
 
     if (cas == 0) {
-        printf("\nCas 1 : Etat initial = 14\n");
-        dist_q5[13] = 1.0; // État 14
-    } else if (cas == 1) {
-        printf("\nCas 2 : Uniformement reparti entre etats 10, 14, 19, 22, 24\n");
-        for (int i = 0; i < nb_etats; i++)
-            dist_q5[etats[i]] = 1.0 / nb_etats;
-    } else {
-        printf("\nCas 3 : Repartition aleatoire entre etats 10, 14, 19, 22, 24\n");
-        double r[nb_etats];
-        double somme = 0.0;
-        for (int i = 0; i < nb_etats; i++) {
-            r[i] = rand() / (double)RAND_MAX;
+        printf("\nCas 1 : état initial = 14\n");
+        dist_q5[13] = 1.0;
+    }
+    else if (cas == 1) {
+        printf("\nCas 2 : uniforme sur 10, 14, 19, 22, 24\n");
+        for (int i = 0; i < nb_etats_q5; i++)
+            dist_q5[etats_q5[i]] = 1.0 / nb_etats_q5;
+    }
+    else {
+        printf("\nCas 3 : répartition aléatoire\n");
+        double r[5], somme = 0;
+        for (int i = 0; i < nb_etats_q5; i++) {
+            r[i] = rand()/(double)RAND_MAX;
             somme += r[i];
         }
-        for (int i = 0; i < nb_etats; i++)
-            dist_q5[etats[i]] = r[i] / somme;
+        for (int i = 0; i < nb_etats_q5; i++)
+            dist_q5[etats_q5[i]] = r[i] / somme;
     }
 
-    // Copie pour itération
+    // ---------- DISTRIBUTION APRÈS n PAS ---------------
+    for (int k = 0; k < 4; k++) {
+
+        int npas = pas_Q5[k];
+
+        double* dist_n = malloc(n * sizeof(double));
+        for (int i = 0; i < n; i++) dist_n[i] = dist_q5[i];
+
+        for (int step = 0; step < npas; step++) {
+
+            double* next = malloc(n * sizeof(double));
+
+            for (int j = 0; j < n; j++) {
+                next[j] = 0.0;
+                for (int i = 0; i < n; i++)
+                    next[j] += dist_n[i] * M[i][j];
+            }
+
+            free(dist_n);
+            dist_n = next;
+        }
+
+        printf("\nDistribution après n = %d pas :\n", npas);
+        for (int i = 0; i < n; i++)
+            if (dist_n[i] > 0.0001)
+                printf("État %d : %.5f\n", i+1, dist_n[i]);
+
+        free(dist_n);
+    }
+
+    // ---------- DISTRIBUTION LIMITE ---------------
     for (int i = 0; i < n; i++) dist_limite_q5[i] = dist_q5[i];
 
-    // Calcul distribution limite
-    for (int step = 1; step <= 1000; step++) {
-        double* next = (double*)malloc(n * sizeof(double));
-        for (int i = 0; i < n; i++) {
-            next[i] = 0.0;
-            for (int j = 0; j < n; j++) {
-                next[i] += dist_limite_q5[j] * M[i][j];
-            }
+    for (int iter = 1; iter <= 1000; iter++) {
+
+        double* next = malloc(n * sizeof(double));
+
+        for (int j = 0; j < n; j++) {
+            next[j] = 0.0;
+            for (int i = 0; i < n; i++)
+                next[j] += dist_limite_q5[i] * M[i][j];
         }
 
         double diff = 0.0;
@@ -831,16 +895,15 @@ for (int cas = 0; cas < 3; cas++) {
             diff += fabs(next[i] - dist_limite_q5[i]);
             dist_limite_q5[i] = next[i];
         }
-        free(next);
 
+        free(next);
         if (diff < 1e-6) break;
     }
 
-    printf("Distribution limite :\n");
-    for (int i = 0; i < n; i++) {
+    printf("\nDistribution limite du cas %d :\n", cas+1);
+    for (int i = 0; i < n; i++)
         if (dist_limite_q5[i] > 0.0001)
-            printf("Etat %d : %.5f\n", i+1, dist_limite_q5[i]);
-    }
+            printf("État %d : %.5f\n", i+1, dist_limite_q5[i]);
 }
 
 free(dist_q5);
