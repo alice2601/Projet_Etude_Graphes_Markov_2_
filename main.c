@@ -1278,12 +1278,411 @@ free(dist_limite_q6);
 printf("\n========================================\n");
 printf("      FIN DE LA QUESTION 6\n");
 printf("========================================\n\n");
-for (int i = 0; i < n; i++) free(M[i]);
+
+    // ================================
+// QUESTION 7
+// ================================
+
+printf("\n\n========================================\n");
+printf("           QUESTION 7\n");
+printf("========================================\n");
+
+// Etats concernes : 3, 7, 23 (indices : 2, 6, 22)
+int etats_q7[] = {2, 6, 22}; // indices en C (etat-1)
+int nb_etats_q7 = 3;
+
+double* dist_q7 = malloc(n * sizeof(double));
+double* dist_limite_q7 = malloc(n * sizeof(double));
+
+int pas_Q7[] = {1, 2, 10, 50};
+
+// ========================================
+// PARTIE A : Depart depuis l'etat 3 uniquement
+// ========================================
+
+printf("\n--- PARTIE A : Etat initial = 3 ---\n");
+
+// Initialisation : 100% dans l'etat 3
+for (int i = 0; i < n; i++) dist_q7[i] = 0.0;
+dist_q7[2] = 1.0; // Etat 3 = indice 2
+
+printf("\nDistribution initiale :\n");
+printf("  Etat 3 : 1.00000\n");
+
+// Calcul pour n = 1, 2, 10, 50 pas
+for (int k = 0; k < 4; k++) {
+    int npas = pas_Q7[k];
+
+    // Copie de la distribution initiale
+    double* dist_n = malloc(n * sizeof(double));
+    for (int i = 0; i < n; i++) dist_n[i] = dist_q7[i];
+
+    // Application de n multiplications par M
+    for (int step = 0; step < npas; step++) {
+        double* next = malloc(n * sizeof(double));
+
+        // Calcul : next = dist_n x M
+        // next[j] = somme_i dist_n[i] x M[i][j]
+        for (int j = 0; j < n; j++) {
+            next[j] = 0.0;
+            for (int i = 0; i < n; i++) {
+                next[j] += dist_n[i] * M[i][j];
+            }
+        }
+
+        free(dist_n);
+        dist_n = next;
+    }
+
+    // Affichage
+    printf("\nDistribution apres n = %d pas :\n", npas);
+    for (int i = 0; i < n; i++) {
+        if (dist_n[i] > 0.0001) // Afficher seulement si probabilite significative
+            printf("  Etat %d : %.5f\n", i+1, dist_n[i]);
+    }
+
+    free(dist_n);
+}
+
+// Calcul de la distribution limite pour la partie A
+for (int i = 0; i < n; i++) dist_limite_q7[i] = dist_q7[i];
+
+int convergent_q7a = 0;
+int iterations_q7a = 0;
+
+for (int iter = 1; iter <= 1000; iter++) {
+    double* next = malloc(n * sizeof(double));
+
+    for (int j = 0; j < n; j++) {
+        next[j] = 0.0;
+        for (int i = 0; i < n; i++)
+            next[j] += dist_limite_q7[i] * M[i][j];
+    }
+
+    // Calcul de la difference pour tester la convergence
+    double diff = 0.0;
+    for (int i = 0; i < n; i++) {
+        diff += fabs(next[i] - dist_limite_q7[i]);
+        dist_limite_q7[i] = next[i];
+    }
+
+    free(next);
+
+    if (diff < 1e-6) {
+        convergent_q7a = 1;
+        iterations_q7a = iter;
+        break;
+    }
+}
+
+// Affichage du resultat
+if (convergent_q7a) {
+    printf("\n[OK] Distribution limite EXISTE (convergence apres %d iterations)\n", iterations_q7a);
+    printf("\nValeurs de la distribution limite (Partie A) :\n");
+    for (int i = 0; i < n; i++) {
+        if (dist_limite_q7[i] > 0.0001)
+            printf("  Etat %d : %.5f\n", i+1, dist_limite_q7[i]);
+    }
+} else {
+    printf("\n[INFO] PAS de distribution limite detectee (Partie A)\n");
+    printf("La classe semble PERIODIQUE. Verification...\n\n");
+
+    // Detection de la periode
+    printf("Evolution sur 20 pas :\n");
+
+    // Reinitialiser
+    for (int i = 0; i < n; i++) dist_q7[i] = 0.0;
+    dist_q7[2] = 1.0; // Etat 3
+
+    for (int step = 0; step <= 20; step++) {
+        printf("n=%2d : ", step);
+        for (int i = 0; i < n; i++) {
+            if (dist_q7[i] > 0.5) { // Etat avec proba dominante
+                printf("Etat %d (%.3f)", i+1, dist_q7[i]);
+            }
+        }
+        printf("\n");
+
+        // Etape suivante
+        double* next = malloc(n * sizeof(double));
+        for (int j = 0; j < n; j++) {
+            next[j] = 0.0;
+            for (int i = 0; i < n; i++)
+                next[j] += dist_q7[i] * M[i][j];
+        }
+        for (int i = 0; i < n; i++) dist_q7[i] = next[i];
+        free(next);
+    }
+
+    printf("\n[CONCLUSION] La classe {3, 7, 23} est PERIODIQUE\n");
+    printf("Il n'existe PAS de distribution limite dans ce cas.\n");
+}
+
+// ========================================
+// PARTIE B : Distribution uniforme sur {3, 7, 23}
+// ========================================
+
+printf("\n\n--- PARTIE B : Uniforme sur {3, 7, 23} ---\n");
+
+// Initialisation : 1/3 pour chaque etat
+for (int i = 0; i < n; i++) dist_q7[i] = 0.0;
+dist_q7[2] = 1.0/3;   // Etat 3
+dist_q7[6] = 1.0/3;   // Etat 7
+dist_q7[22] = 1.0/3;  // Etat 23
+
+printf("\nDistribution initiale :\n");
+printf("  Etat 3  : %.5f\n", 1.0/3);
+printf("  Etat 7  : %.5f\n", 1.0/3);
+printf("  Etat 23 : %.5f\n", 1.0/3);
+
+// Calcul pour n = 1, 2, 10, 50 pas
+for (int k = 0; k < 4; k++) {
+    int npas = pas_Q7[k];
+
+    double* dist_n = malloc(n * sizeof(double));
+    for (int i = 0; i < n; i++) dist_n[i] = dist_q7[i];
+
+    for (int step = 0; step < npas; step++) {
+        double* next = malloc(n * sizeof(double));
+
+        for (int j = 0; j < n; j++) {
+            next[j] = 0.0;
+            for (int i = 0; i < n; i++)
+                next[j] += dist_n[i] * M[i][j];
+        }
+
+        free(dist_n);
+        dist_n = next;
+    }
+
+    printf("\nDistribution apres n = %d pas :\n", npas);
+    for (int i = 0; i < n; i++) {
+        if (dist_n[i] > 0.0001)
+            printf("  Etat %d : %.5f\n", i+1, dist_n[i]);
+    }
+
+    free(dist_n);
+}
+
+// Distribution limite Partie B
+for (int i = 0; i < n; i++) dist_limite_q7[i] = dist_q7[i];
+
+int convergent_q7b = 0;
+int iterations_q7b = 0;
+
+for (int iter = 1; iter <= 1000; iter++) {
+    double* next = malloc(n * sizeof(double));
+
+    for (int j = 0; j < n; j++) {
+        next[j] = 0.0;
+        for (int i = 0; i < n; i++)
+            next[j] += dist_limite_q7[i] * M[i][j];
+    }
+
+    double diff = 0.0;
+    for (int i = 0; i < n; i++) {
+        diff += fabs(next[i] - dist_limite_q7[i]);
+        dist_limite_q7[i] = next[i];
+    }
+
+    free(next);
+
+    if (diff < 1e-6) {
+        convergent_q7b = 1;
+        iterations_q7b = iter;
+        break;
+    }
+}
+
+if (convergent_q7b) {
+    printf("\n[OK] Distribution limite EXISTE (convergence apres %d iterations)\n", iterations_q7b);
+    printf("\nValeurs de la distribution limite (Partie B) :\n");
+    for (int i = 0; i < n; i++) {
+        if (dist_limite_q7[i] > 0.0001)
+            printf("  Etat %d : %.5f\n", i+1, dist_limite_q7[i]);
+    }
+} else {
+    printf("\n[INFO] PAS de distribution limite detectee (Partie B)\n");
+}
+
+// ========================================
+// PARTIE C : Repartition aleatoire sur {3, 7, 23}
+// ========================================
+
+printf("\n\n--- PARTIE C : Repartition aleatoire sur {3, 7, 23} ---\n");
+
+// Tester plusieurs scenarios avec differents parametres (a, b, c)
+double parametres_q7[][3] = {
+    {0.5, 0.3, 0.2},  // Scenario 1
+    {0.2, 0.2, 0.6},  // Scenario 2
+    {0.7, 0.1, 0.2},  // Scenario 3
+    {0.1, 0.8, 0.1},  // Scenario 4
+};
+
+int nb_scenarios_q7 = 4;
+
+// Stocker les distributions limites pour comparaison
+double** limites_q7c = malloc(nb_scenarios_q7 * sizeof(double*));
+for (int s = 0; s < nb_scenarios_q7; s++) {
+    limites_q7c[s] = malloc(n * sizeof(double));
+}
+
+for (int scenario = 0; scenario < nb_scenarios_q7; scenario++) {
+    double a = parametres_q7[scenario][0];
+    double b = parametres_q7[scenario][1];
+    double c = parametres_q7[scenario][2];
+
+    printf("\n=== Scenario %d : a=%.2f, b=%.2f, c=%.2f ===\n",
+           scenario+1, a, b, c);
+
+    // Initialisation
+    for (int i = 0; i < n; i++) dist_q7[i] = 0.0;
+    dist_q7[2] = a;   // Etat 3
+    dist_q7[6] = b;   // Etat 7
+    dist_q7[22] = c;  // Etat 23
+
+    printf("Distribution initiale :\n");
+    printf("  Etat 3  : %.5f\n", a);
+    printf("  Etat 7  : %.5f\n", b);
+    printf("  Etat 23 : %.5f\n", c);
+
+    // Calcul pour n = 1, 2, 10, 50 pas
+    for (int k = 0; k < 4; k++) {
+        int npas = pas_Q7[k];
+
+        double* dist_n = malloc(n * sizeof(double));
+        for (int i = 0; i < n; i++) dist_n[i] = dist_q7[i];
+
+        for (int step = 0; step < npas; step++) {
+            double* next = malloc(n * sizeof(double));
+
+            for (int j = 0; j < n; j++) {
+                next[j] = 0.0;
+                for (int i = 0; i < n; i++)
+                    next[j] += dist_n[i] * M[i][j];
+            }
+
+            free(dist_n);
+            dist_n = next;
+        }
+
+        printf("\nDistribution apres n = %d pas :\n", npas);
+        for (int i = 0; i < n; i++) {
+            if (dist_n[i] > 0.0001)
+                printf("  Etat %d : %.5f\n", i+1, dist_n[i]);
+        }
+
+        free(dist_n);
+    }
+
+    // Distribution limite
+    for (int i = 0; i < n; i++) dist_limite_q7[i] = dist_q7[i];
+
+    for (int iter = 1; iter <= 1000; iter++) {
+        double* next = malloc(n * sizeof(double));
+
+        for (int j = 0; j < n; j++) {
+            next[j] = 0.0;
+            for (int i = 0; i < n; i++)
+                next[j] += dist_limite_q7[i] * M[i][j];
+        }
+
+        double diff = 0.0;
+        for (int i = 0; i < n; i++) {
+            diff += fabs(next[i] - dist_limite_q7[i]);
+            dist_limite_q7[i] = next[i];
+        }
+
+        free(next);
+
+        if (diff < 1e-6) break;
+    }
+
+    printf("\nDistribution limite (Scenario %d) :\n", scenario+1);
+    for (int i = 0; i < n; i++) {
+        if (dist_limite_q7[i] > 0.0001)
+            printf("  Etat %d : %.5f\n", i+1, dist_limite_q7[i]);
+    }
+
+    // Sauvegarder pour comparaison
+    for (int i = 0; i < n; i++) {
+        limites_q7c[scenario][i] = dist_limite_q7[i];
+    }
+}
+
+// ========================================
+// COMPARAISON DES DISTRIBUTIONS LIMITES
+// ========================================
+
+printf("\n\n=== ANALYSE : Les distributions limites sont-elles identiques ? ===\n");
+
+int identiques_q7 = 1;
+for (int s = 1; s < nb_scenarios_q7; s++) {
+    double diff_totale = 0.0;
+    for (int i = 0; i < n; i++) {
+        diff_totale += fabs(limites_q7c[s][i] - limites_q7c[0][i]);
+    }
+
+    if (diff_totale > 1e-4) {
+        identiques_q7 = 0;
+        printf("[DIFF] Scenario %d differe du scenario 1 (difference = %.6f)\n",
+               s+1, diff_totale);
+    }
+}
+
+if (identiques_q7) {
+    printf("\n[CONCLUSION PARTIE C]\n");
+    printf("Toutes les distributions limites sont IDENTIQUES !\n");
+    printf("La distribution limite NE DEPEND PAS des parametres (a, b, c).\n");
+    printf("\nCela signifie que {3, 7, 23} forme une classe finale APERIODIQUE.\n");
+} else {
+    printf("\n[CONCLUSION PARTIE C]\n");
+    printf("Les distributions limites DEPENDENT des parametres (a, b, c).\n");
+}
+
+// Export CSV pour graphiques Excel
+FILE* f_q7 = fopen("question7_distributions.csv", "w");
+if (f_q7) {
+    fprintf(f_q7, "n,Etat3,Etat7,Etat23\n");
+
+    // Reinitialiser depuis l'etat 3
+    for (int i = 0; i < n; i++) dist_q7[i] = 0.0;
+    dist_q7[2] = 1.0;
+
+    for (int step = 0; step <= 100; step++) {
+        fprintf(f_q7, "%d,%.6f,%.6f,%.6f\n",
+                step, dist_q7[2], dist_q7[6], dist_q7[22]);
+
+        double* next = malloc(n * sizeof(double));
+        for (int j = 0; j < n; j++) {
+            next[j] = 0.0;
+            for (int i = 0; i < n; i++)
+                next[j] += dist_q7[i] * M[i][j];
+        }
+        for (int i = 0; i < n; i++) dist_q7[i] = next[i];
+        free(next);
+    }
+
+    fclose(f_q7);
+    printf("\n[EXPORT] Fichier 'question7_distributions.csv' cree pour tracer les graphes.\n");
+}
+
+// Liberation memoire
+for (int s = 0; s < nb_scenarios_q7; s++) {
+    free(limites_q7c[s]);
+}
+free(limites_q7c);
+free(dist_q7);
+free(dist_limite_q7);
+
+printf("\n========================================\n");
+printf("      FIN DE LA QUESTION 7\n");
+printf("========================================\n\n");
+
+
+    for (int i = 0; i < n; i++) free(M[i]);
 free(M);
 
 
 return 0;
 }
-
-
-
