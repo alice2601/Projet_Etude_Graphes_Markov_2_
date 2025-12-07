@@ -1679,6 +1679,71 @@ printf("\n========================================\n");
 printf("      FIN DE LA QUESTION 7\n");
 printf("========================================\n\n");
 
+    /*****************************/
+    /*        QUESTION 12        */
+    /*****************************/
+    printf("\n=============================\n");
+    printf("        QUESTION 12\n");
+    printf("=============================\n");
+
+    // ----- CLASSES FINALES -----
+    int C1[] = {11,18,4,26,27,1};
+    int C2[] = {5,12,21,25,2};
+    int C3[] = {6,20,17};
+    int C5[] = {16,9,8};
+
+    int sizeC1 = 6, sizeC2 = 5, sizeC3 = 3, sizeC5 = 3;
+
+    // ----- ÉTATS INITIAUX -----
+    int S[] = {10,19,22,24};
+    int nbS = 4;
+
+    // ----- CALCUL DE M^1000 -----
+    double** Mpow = creatematricezero(n);
+    copymatrice(M, Mpow, n);
+
+    for (int t = 0; t < 1000; t++) {
+        double** newM = multiplymatrice(Mpow, M, n);
+
+        // libérer l’ancienne matrice
+        for (int i = 0; i < n; i++) free(Mpow[i]);
+        free(Mpow);
+
+        Mpow = newM;
+    }
+
+    printf("M^1000 calcule.\n\n");
+
+    // ----- CALCUL DES PROBABILITÉS D’ABSORPTION -----
+    for (int a = 0; a < nbS; a++) {
+
+        int s = S[a] - 1;   // index 0-based
+
+        // vecteur initial e_s
+        double* pi = malloc(n * sizeof(double));
+        double* out = malloc(n * sizeof(double));
+        for (int i = 0; i < n; i++) pi[i] = 0.0;
+        pi[s] = 1.0;
+
+        // pi_final = pi × M^1000
+        vec_mul_mat(pi, Mpow, out, n);
+
+        // Sommes dans les classes finales
+        double p1 = 0, p2 = 0, p3 = 0, p5 = 0;
+
+        for (int i = 0; i < sizeC1; i++) p1 += out[C1[i] - 1];
+        for (int i = 0; i < sizeC2; i++) p2 += out[C2[i] - 1];
+        for (int i = 0; i < sizeC3; i++) p3 += out[C3[i] - 1];
+        for (int i = 0; i < sizeC5; i++) p5 += out[C5[i] - 1];
+
+        printf("Etat %d -> C1=%.6f  |  C2=%.6f  |  C3=%.6f  |  C5=%.6f\n",
+               S[a], p1, p2, p3, p5);
+
+        free(pi);
+        free(out);
+    }
+
+
 
     for (int i = 0; i < n; i++) free(M[i]);
 free(M);
